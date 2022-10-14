@@ -27,16 +27,24 @@
         <button>Violent</button>
         </h3>
     </div>
+    <div id="incidentMap"></div>
     <div id="chart_box">
-        <div id="map"></div>
+        <div id="arrestMap"></div>
+        <div id="multi_charts"></div>
         <div id="description"></div>
-        <div id="bar_chart"></div>
-        <div id="multi_chart"></div>
     </div>
-    <div id="timeline">
-        <div id="playbutton"></div>
-        <div id="time"></div>
-    </div>
+    <div id="timeline"></div>
 </div>
+<script>
+    let ArrestMap = new ArrestMap("incidentMap");
+    let IncidentMap = new IncidentMap("arrestMap");
+    let Charts = new Charts("multi_charts");
+    let Timeline = new TimeLine("timeline");
+
+    ArrestMap.render();
+    IncidentMap.render();
+    Charts.render();
+    Timeline.render();
+</script>
 </body>
 </html>
