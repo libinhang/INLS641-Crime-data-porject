@@ -2,8 +2,10 @@
 <html lang="en">
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://unpkg.com/simple-statistics@7.7.0/dist/simple-statistics.min.js"></script>
-<script src="arrest_made_map.js"></script>
-<script src="Incident_report_map.js"></script>
+<script src="js/twoMaps.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/multi_charts.js"></script>
+<link rel="stylesheet" href="css/map.css">
 <head>
     <meta charset="UTF-8">
     <title>Crime data project</title>
@@ -12,10 +14,10 @@
 <div id="project">
     <div id="title">
         <h2>Police Arrests in Chapel Hill
-        <select>
-            <option>Arrest Made Map</option>
-            <option>Incident Report Map</option>
-        </select>
+            <select onchange="mapChange.render(this.options[this.selectedIndex].value);">
+                <option value="Incident_report">Incident Report Map</option>
+                <option value="Arrest_made">Arrest Made Map</option>
+            </select>
         </h2>
     </div>
     <div id="filter_bar">
@@ -27,24 +29,21 @@
         <button>Violent</button>
         </h3>
     </div>
-    <div id="incidentMap"></div>
+    <div id="maps"></div>
+    <div id="description"></div>
     <div id="chart_box">
-        <div id="arrestMap"></div>
         <div id="multi_charts"></div>
-        <div id="description"></div>
+        <div id="timeline"></div>
     </div>
-    <div id="timeline"></div>
 </div>
 <script>
-    let ArrestMap = new ArrestMap("incidentMap");
-    let IncidentMap = new IncidentMap("arrestMap");
-    let Charts = new Charts("multi_charts");
-    let Timeline = new TimeLine("timeline");
+    let mapChange = new TwoMaps("maps");
+    let mCharts = new Multi_Charts("multi_charts");
+    let timeLine = new TimeLine("timeline");
 
-    ArrestMap.render();
-    IncidentMap.render();
-    Charts.render();
-    Timeline.render();
+    mapChange.render("Incident_report")
+    mCharts.render();
+    timeLine.render();
 </script>
 </body>
 </html>
