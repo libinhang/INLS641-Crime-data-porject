@@ -37,3 +37,18 @@ html, body {
 .motorway {
     stroke-width: 4px;
 }
+#Imap{
+    width: 98%; height: 500px; border: 1px solid black; text-align: center;
+}
+#description{
+    width: 98%; height: 50px; bottom: 0; display: block;
+}
+#multi_charts{
+    width: 65%; height: 400px; border: 1px solid black; position: absolute; display: none;
+}
+#Amap{
+    height: 400px; border: 1px solid black; margin-left: 68%; display: none;
+}
+#timeline{
+    width: 90%; height: 80px; border: 1px solid black; bottom: 0; display: none;
+}
