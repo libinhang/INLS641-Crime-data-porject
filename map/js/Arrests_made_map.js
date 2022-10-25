@@ -38,7 +38,56 @@ class AMmap{
     }
     render(map_type) {
         // load map
+        d3.json("../data/chapel_hill_all_streets.geojson", d => d).then(geo_json_data => {
+            // Define the projection.
+            let projection = d3.geoConicConformal()
+                .parallels([34 + 20 / 60, 36 + 10 / 60])
+                .rotate([79, 0])
+                // Fit the map to a space that is 7x the size of the SVG element. This gives
+                // us a fair amount of map that is beyond the boundary for panning.
+                .fitExtent([[-3 * this.width, -3 * this.height], [4 * this.width, 4 * this.height]], geo_json_data);
 
+            // Define the path generator using the projection.
+            let path = d3.geoPath().projection(projection);
+
+            // Create a zoom control for the map and attach it to the svg eleent.
+            const zoom = d3.zoom()
+                .scaleExtent([0.3, 7])
+                .on('zoom', (e, d) => {
+                    this.svg.select('g')
+                        .attr('transform', e.transform);
+                });
+            this.svg.call(zoom);
+
+            // Draw the street map.
+            this.svg.append("g").selectAll("path")
+                .data(geo_json_data.features, d => d.properties.name).join("path")
+                .attr("class", d => {
+                    if (d.properties.highway == "residential") {
+                        return "way residential";
+                    } else if (d.properties.highway == "tertiary") {
+                        return "way tertiary";
+                    } else if (d.properties.highway == "secondary") {
+                        return "way secondary";
+                    } else if (d.properties.highway == "primary") {
+                        return "way primary";
+                    } else if (d.properties.highway == "trunk") {
+                        return "way trunk";
+                    } else if (d.properties.highway == "motorway") {
+                        return "way motorway";
+                    } else {
+                        return "way link";
+                    }
+                })
+                .attr("d", path)
+                .on("mouseenter", (e, d) => {
+                    d3.select("#road_name").html(d.properties.name.length > 0 ? d.properties.name : "&nbsp;");
+                })
+                .on("mouseout", (e, d) => {
+                        d3.select("#road_name").html("&nbsp;");
+                    }
+                )
+        })
     }
 
 }

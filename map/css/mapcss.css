@@ -1,0 +1,39 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+.way {
+    fill: none;
+    stroke: black;
+}
+.way:hover {
+    cursor: crosshair;
+}
+
+.link {
+    stroke-width: 0.75px;
+}
+
+.residential {
+    stroke-width: 0.25px;
+}
+
+.tertiary {
+    stroke-width: 0.75px;
+}
+
+.secondary {
+    stroke-width: 1px;
+}
+
+.primary {
+    stroke-width: 2px;
+}
+
+.trunk {
+    stroke-width: 3px;
+}
+
+.motorway {
+    stroke-width: 4px;
+}
