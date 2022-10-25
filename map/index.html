@@ -2,19 +2,61 @@
 <html lang="en">
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://unpkg.com/simple-statistics@7.7.0/dist/simple-statistics.min.js"></script>
-<script src="js/twoMaps.js"></script>
+<script src="js/Arrests_made_map.js"></script>
+<script src="js/Incident_report_map.js"></script>
 <script src="js/timeline.js"></script>
 <script src="js/multi_charts.js"></script>
-<link rel="stylesheet" href="css/map.css">
+<script src="https://unpkg.com/topojson@3"></script>
 <head>
     <meta charset="UTF-8">
     <title>Crime data project</title>
 </head>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+    .way {
+        fill: none;
+        stroke: black;
+    }
+    .way:hover {
+        cursor: crosshair;
+    }
+
+    .link {
+        stroke-width: 0.75px;
+    }
+
+    .residential {
+        stroke-width: 0.25px;
+    }
+
+    .tertiary {
+        stroke-width: 0.75px;
+    }
+
+    .secondary {
+        stroke-width: 1px;
+    }
+
+    .primary {
+        stroke-width: 2px;
+    }
+
+    .trunk {
+        stroke-width: 3px;
+    }
+
+    .motorway {
+        stroke-width: 4px;
+    }
+</style>
 <body>
 <div id="project">
     <div id="title">
         <h2>Police Arrests in Chapel Hill
-            <select onchange="mapChange.render(this.options[this.selectedIndex].value);">
+            <select onchange="mapChange(this.options[this.selectedIndex].value);">
                 <option value="Incident_report">Incident Report Map</option>
                 <option value="Arrest_made">Arrest Made Map</option>
             </select>
@@ -28,20 +70,45 @@
         <button>Drugs</button>
         <button>Violent</button>
         </h3>
+        <span style="font-size: 18pt;" id="road_name">&nbsp;</span>
     </div>
-    <div id="maps"></div>
-    <div id="description"></div>
-    <div id="chart_box">
-        <div id="multi_charts"></div>
-        <div id="timeline"></div>
+    <div>
+        <svg id="Imap" style="width: 100%; height: 500px; border: 1px solid black; text-align: center;"></svg>
+        <div id="timeline" style="width: 100%; height: 50px; bottom: 0; display: block;"></div>
+    </div>
+    <div>
+        <svg id="Amap" style="width: 60%; height: 400px; border: 1px solid black; position: absolute; display: none;"></svg>
+        <svg id="multi_charts" style="height: 400px; border: 1px solid black; margin-left: 70%; display: none;"></svg>
+        <span id="description" style="width: 60%; height: 50px; border: 1px solid black; bottom: 0; display: none;"></span>
     </div>
 </div>
 <script>
-    let mapChange = new TwoMaps("maps");
+    let incidentMap = new IRmap("Imap");
+    let arrestMap = new AMmap("Amap");
     let mCharts = new Multi_Charts("multi_charts");
     let timeLine = new TimeLine("timeline");
-
-    mapChange.render("Incident_report")
+    function mapChange(map_type){
+        let i = document.getElementById("Imap")
+        let a = document.getElementById("Amap")
+        let m = document.getElementById("multi_charts")
+        let d = document.getElementById("description")
+        let t = document.getElementById("timeline")
+        if(map_type == "Incident_report"){
+            a.style.display = 'none'
+            i.style.display = 'block'
+            m.style.display = 'none'
+            d.style.display = 'none'
+            t.style.display = 'block'
+        }else if(map_type == "Arrest_made") {
+            i.style.display = 'none'
+            a.style.display = 'block'
+            m.style.display = 'block'
+            d.style.display = 'block'
+            t.style.display = 'none'
+        }
+    }
+    incidentMap.render("Incident_report")
+    arrestMap.render("Arrest_made")
     mCharts.render();
     timeLine.render();
 </script>
