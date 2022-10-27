@@ -1,0 +1,213 @@
+library(readr)
+Police_Arrests_Made <- read_csv("Police_Arrests_Made.csv")
+
+cities_list <- c("CHAPEL HILL", "CARRBORO", "CHAPEL ST HILL", "CARBORRO", "CHAEP HILL", "CH")
+
+ch_police_arrests <- filter(Police_Arrests_Made, Police_Arrests_Made$City %in% cities_list)
+
+primary_charges <- unique(ch_police_arrests$Primary_Charge) %>%
+  sort() %>%
+  data.frame() %>%
+  setNames("Charge")
+
+
+
+#### OBSTRUCTION ####
+FTA <- primary_charges[grep("FTA", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% FTA)
+
+FTA_cont <- primary_charges[grep("FAILURE TO APPEAR", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% FTA_cont)
+
+FTA_cont_2 <- primary_charges[grep("FAIL TO APPEAR", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% FTA_cont_2)
+
+OBSTRUCTION <- primary_charges[grep("OBSTRUCT", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% OBSTRUCTION)
+
+FALSE_ALARM <- primary_charges[grep("FALSE ALARM", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% FALSE_ALARM)
+
+FALSE_REPORT <- primary_charges[grep("FALSE REPORT", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% FALSE_REPORT)
+
+OFA <- primary_charges[grep("OFA", primary_charges$Charge),] 
+OFA <- OFA[-35]
+
+primary_charges <- subset(primary_charges, !Charge %in% OFA)
+
+OFA_cont <- primary_charges[grep("ORDER FOR ARREST", primary_charges$Charge),] 
+
+primary_charges <- subset(primary_charges, !Charge %in% OFA_cont)
+
+
+#### WARRANTS ####
+WFA <- primary_charges[grep("WFA", primary_charges$Charge),] 
+
+primary_charges <- subset(primary_charges, !Charge %in% WFA)
+
+WFA_cont <- primary_charges[grep("WARRANT", primary_charges$Charge),] 
+
+primary_charges <- subset(primary_charges, !Charge %in% WFA_cont)
+
+
+#### AIDING AND ABETTING ####
+AID_ABET <- primary_charges[grep("AID", primary_charges$Charge),] 
+AID_ABET <- AID_ABET[-22]
+
+primary_charges <- subset(primary_charges, !Charge %in% AID_ABET)
+
+
+#### LARCENY ####
+LARCENY <- primary_charges[grep("LARCENY", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% LARCENY)
+
+LARCENY_cont <- primary_charges[grep("LARC", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% LARCENY_cont)
+
+BURGLARY <- primary_charges[grep("BURGLARY", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% BURGLARY)
+
+
+#### BREAKING AND ENTERING ####
+BREAK <- primary_charges[grep("BREAK", primary_charges$Charge),]
+BREAK <- BREAK[-4]
+
+primary_charges <- subset(primary_charges, !Charge %in% BREAK)
+
+BREAK_cont <- primary_charges[grep("B&", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% BREAK_cont)
+
+
+### TRESSPASS
+TRESSPASS <- primary_charges[grep("TRESPAS", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% TRESSPASS)
+
+
+#### CHILD/MINOR ####
+CHILD <- primary_charges[grep("CHILD", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% CHILD)
+
+MINOR <- primary_charges[grep("MINOR", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% MINOR)
+
+
+#### ASSAULT ####
+ASSAULT <- primary_charges[grep("ASSAULT", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ASSAULT)
+
+ASSAULT_cont <- primary_charges[grep("ASLT", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ASSAULT_cont)
+
+ASSAULT_cont_2 <- primary_charges[grep("ASSLT", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ASSAULT_cont_2)
+
+ASSAULT_cont_3 <- primary_charges[grep("ASSU", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ASSAULT_cont_3)
+
+ASSAULT_cont_4 <- primary_charges[grep("AWIK", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ASSAULT_cont_4)
+
+ADW <- primary_charges[grep("ADW", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ADW)
+
+ADW_cont <- primary_charges[grep("AWD", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ADW_cont)
+
+ROBBERY <- primary_charges[grep("ROBBERY", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ROBBERY)
+
+
+#### KIDNAPPING ####
+KIDNAP <- primary_charges[grep("KIDNAP", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% KIDNAP)
+
+
+#### ARSON ####
+ARSON <- primary_charges[grep("ARSON", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ARSON)
+
+BURN <- primary_charges[grep("BURN", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% BURN)
+
+
+#### DRIVING ####
+DWI <- primary_charges[grep("DWI", primary_charges$Charge),]
+DWI <- DWI[-1]
+
+primary_charges <- subset(primary_charges, !Charge %in% DWI)
+
+DRIVING <- primary_charges[grep("DRIVING", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% DRIVING)
+
+
+#### ALCOHOL ####
+OPEN <- primary_charges[grep("OPEN", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% OPEN)
+
+ALCOHOL <- primary_charges[grep("ALCOHOL", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ALCOHOL)
+
+INTOX <- primary_charges[grep("INTOX", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% INTOX)
+
+CONSUM <- primary_charges[grep("CONSUM", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% CONSUM)
+
+DRUNK <- primary_charges[grep("DRUNK", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% DRUNK)
+
+
+#### MARIJUANA ####
+MARI <- primary_charges[grep("MARI", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% MARI)
+
+
+#### DRUG ####
+DRUG <- primary_charges[grep("DRUG", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% DRUG)
+
+
+#### ANIMAL & DOG ####
+ANIMAL <- primary_charges[grep("ANIMAL", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% ANIMAL)
+
+DOG <- primary_charges[grep("DOG", primary_charges$Charge),]
+
+primary_charges <- subset(primary_charges, !Charge %in% DOG)
+
+
+
