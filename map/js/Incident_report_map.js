@@ -29,7 +29,6 @@ class IRmap {
         }).then(data => {
             //process data
             console.log("success")
-            console.log(data)
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
             console.log(error);
