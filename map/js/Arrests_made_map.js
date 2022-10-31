@@ -1,6 +1,6 @@
 class AMmap{
     constructor(container_id) {
-        this.arrest_url = "../data/Police_Arrests_Made.csv";
+        this.arrest_url = "../data/clean_ch_arrests.csv";
         this.container_id = container_id
         this.loadAndPrepare();
         this.height = 1000;
@@ -17,6 +17,7 @@ class AMmap{
                 latitude: d.Y,
                 id: d.Incident_Id,
                 charges: d.Primary_Charge,
+                charge_cat: d.Category,
                 street: d.Street,
                 city: d.City,
                 date: d.Date_of_Arrest,
@@ -29,6 +30,7 @@ class AMmap{
             }
         }).then(data=>{
             //process data
+            console.log(data)
             console.log("success")
         }).catch(error=>{
             console.log("Error when loading or processing the CSV data.")
