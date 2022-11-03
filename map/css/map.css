@@ -5,6 +5,10 @@ html, body {
 button:hover{
     background-color: lightslategrey;
 }
+button:focus, button:active{
+    background-color: lightslategrey;
+    outline: none;
+}
 .way {
     fill: none;
     stroke: black;

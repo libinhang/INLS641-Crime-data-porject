@@ -26,11 +26,11 @@
     </div>
     <div id="filter_bar">
         <h3>Explore:
-            <button>All</button>
-            <button>Personal Property</button>
-            <button>Vehicular</button>
-            <button>Drugs</button>
-            <button>Violent</button>
+            <button value="All" onclick="fiterData(this.value)">All</button>
+            <button value="Personal_property" onclick="fiterData(this.value)">Personal Property</button>
+            <button value="Vehicular" onclick="fiterData(this.value)">Vehicular</button>
+            <button value="Drugs" onclick="fiterData(this.value)">Drugs</button>
+            <button value="Violent" onclick="fiterData(this.value)">Violent</button>
             <span style="font-size: 15pt;" id="road_name">&nbsp;</span>
         </h3>
     </div>
@@ -50,16 +50,23 @@
     </div>
 </div>
 <script>
+    let i = document.getElementById("Imap")
+    let a = document.getElementById("Amap")
+    let m = document.getElementById("multi_charts")
+    let d = document.getElementById("description")
+    let t = document.getElementById("timeline")
+
     let incidentMap = new IRmap("Imap");
     let arrestMap = new AMmap("Amap");
     let mCharts = new Multi_Charts("multi_charts");
     let timeLine = new TimeLine("timeline");
+
+    function fiterData(_subs){
+        incidentMap.loadAndPrepare(_subs);
+        arrestMap.loadAndPrepare(_subs);
+    }
+
     function mapChange(map_type){
-        let i = document.getElementById("Imap")
-        let a = document.getElementById("Amap")
-        let m = document.getElementById("multi_charts")
-        let d = document.getElementById("description")
-        let t = document.getElementById("timeline")
         if(map_type == "Incident_report"){
             a.style.display = 'none'
             i.style.display = 'block'
@@ -74,8 +81,6 @@
             t.style.display = 'block'
         }
     }
-    incidentMap.render("Incident_report")
-    arrestMap.render("Arrest_made")
     mCharts.render();
     timeLine.render();
 </script>

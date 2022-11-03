@@ -1,17 +1,18 @@
-class AMmap{
+class AMmap {
     constructor(container_id) {
         this.arrest_url = "../data/clean_ch_arrests.csv";
         this.container_id = container_id
-        this.loadAndPrepare();
-        this.height = 1000;
-        this.width = 1000;
-
+        this.loadAndPrepare()
+        this.map_render();
+        this.height = 500;
+        this.width = 1500;
         // Select the SVG element for the map.
         this.svg = d3.select("#" + this.container_id);
     }
-    loadAndPrepare(){
+
+    loadAndPrepare(_subs){
         // Load arrest made data.
-        d3.csv(this.arrest_url, d => {
+       d3.csv(this.arrest_url, d => {
             return {
                 longitude: d.X,
                 latitude: d.Y,
@@ -28,16 +29,35 @@ class AMmap{
                 type: d.Type_of_Arrest,
                 drug_or_alcohol: d.Drugs_or_Alcohol_Present,
             }
-        }).then(data=>{
+        }).then(data => {
             //process data
-            console.log(data)
-            console.log("success")
-        }).catch(error=>{
+            let min_longitude = d3.min(data, d=>d.longitude);
+            let min_latitude = d3.min(data, d=>d.latitude);
+            let max_longitude = d3.max(data, d=>d.longitude);
+            let max_latitude = d3.max(data, d=>d.latitude);
+
+           //filtering data
+            let data_subs = data
+            if(_subs!="All"){
+                data_subs = data.filter(d=>d.charge_cat == _subs)
+            }
+            this.render(data_subs)
+            this.map_render(min_longitude,min_latitude,max_longitude,max_latitude)
+        }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
             console.log(error);
         })
     }
-    render(map_type) {
+
+    map_render(min_longitude,min_latitude,max_longitude,max_latitude){
+        //set up x and y
+        this.x = d3.scaleLinear()
+            .domain([min_longitude, max_longitude])
+            .range([0,this.height]);
+        this.y = d3.scaleLinear()
+            .domain([min_latitude, max_latitude])
+            .range([0, this.height]);
+
         // load map
         d3.json("../data/chapel_hill_all_streets.geojson", d => d).then(geo_json_data => {
             // Define the projection.
@@ -91,4 +111,7 @@ class AMmap{
         })
     }
 
+    render(data_subs) {
+       console.log(data_subs)
+    }
 }
