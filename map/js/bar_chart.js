@@ -30,7 +30,6 @@ class Bar_chart {
                     charge_cat: group
                 }
             }, d=>d.charge_cat);
-            console.log(group_data)
             this.render(group_data)
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
@@ -51,7 +50,7 @@ render(group_data){
         .style("text-anchor", "end");
     let y = d3.scaleBand()
         .range([ 0, this.height ])
-        .domain(group_data.map(d => d.charge_cat))
+        .domain(group_data.charge_cat)
         .padding(.1);
 
     svg.append("g")

@@ -1,7 +1,8 @@
 class Pie_chart{
-    constructor() {
+    constructor(container_id) {
+
     }
-    loadAndPrepare(){
+    loadAndPrepare(_subs){
 
     }
     render(){
