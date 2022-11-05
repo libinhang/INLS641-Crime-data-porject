@@ -5,7 +5,7 @@
 <script src="js/Arrests_made_map.js"></script>
 <script src="js/Incident_report_map.js"></script>
 <script src="js/timeline.js"></script>
-<script src="js/multi_charts.js"></script>
+<script src="js/bar_chart.js"></script>
 <script src="https://unpkg.com/topojson@3"></script>
 <head>
     <meta charset="UTF-8">
@@ -26,11 +26,11 @@
     </div>
     <div id="filter_bar">
         <h3>Explore:
-            <button value="All" onclick="fiterData(this.value)">All</button>
-            <button value="Personal_property" onclick="fiterData(this.value)">Personal Property</button>
-            <button value="Vehicular" onclick="fiterData(this.value)">Vehicular</button>
-            <button value="Drugs" onclick="fiterData(this.value)">Drugs</button>
-            <button value="Violent" onclick="fiterData(this.value)">Violent</button>
+            <select onchange="filterData(this.options[this.selectedIndex].value);">
+                <option value="All">All</option>
+                <option value="Drugs">Drugs</option>
+                <option value="Animals">Animals</option>
+            </select>
             <span style="font-size: 15pt;" id="road_name">&nbsp;</span>
         </h3>
     </div>
@@ -58,12 +58,15 @@
 
     let incidentMap = new IRmap("Imap");
     let arrestMap = new AMmap("Amap");
-    let mCharts = new Multi_Charts("multi_charts");
+    let bar_chart = new Bar_chart("bar_chart");
+    let pie_chart = new Pie_chart("pie_chart");
     let timeLine = new TimeLine("timeline");
 
-    function fiterData(_subs){
+    function filterData(_subs){
         incidentMap.loadAndPrepare(_subs);
         arrestMap.loadAndPrepare(_subs);
+        bar_chart.loadAndPrepare(_subs);
+        pie_chart.loadAndPrepare(_subs);
     }
 
     function mapChange(map_type){
@@ -81,7 +84,10 @@
             t.style.display = 'block'
         }
     }
-    mCharts.render();
+    incidentMap.loadAndPrepare("All");
+    arrestMap.loadAndPrepare("All");
+    bar_chart.loadAndPrepare("All");
+    pie_chart.loadAndPrepare("All");
     timeLine.render();
 </script>
 </body>

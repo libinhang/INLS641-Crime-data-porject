@@ -2,9 +2,10 @@ class AMmap {
     constructor(container_id) {
         this.arrest_url = "../data/clean_ch_arrests.csv";
         this.container_id = container_id
+        this.cata_color = d3.scaleOrdinal(d3.schemeCategory10);
+        this.map_render()
         this.loadAndPrepare()
-        this.map_render();
-        this.height = 500;
+        this.height = 1500;
         this.width = 1500;
         // Select the SVG element for the map.
         this.svg = d3.select("#" + this.container_id);
@@ -36,28 +37,27 @@ class AMmap {
             let max_longitude = d3.max(data, d=>d.longitude);
             let max_latitude = d3.max(data, d=>d.latitude);
 
+           // set up x and y
+           let x = d3.scaleLinear()
+               .domain([min_longitude, max_longitude])
+               .range([0,this.width]);
+           let y = d3.scaleLinear()
+               .domain([min_latitude, max_latitude])
+               .range([this.height,0]);
+
            //filtering data
             let data_subs = data
             if(_subs!="All"){
                 data_subs = data.filter(d=>d.charge_cat == _subs)
             }
-            this.render(data_subs)
-            this.map_render(min_longitude,min_latitude,max_longitude,max_latitude)
+            this.render(data_subs,x,y)
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
             console.log(error);
         })
     }
 
-    map_render(min_longitude,min_latitude,max_longitude,max_latitude){
-        //set up x and y
-        this.x = d3.scaleLinear()
-            .domain([min_longitude, max_longitude])
-            .range([0,this.height]);
-        this.y = d3.scaleLinear()
-            .domain([min_latitude, max_latitude])
-            .range([0, this.height]);
-
+    map_render(){
         // load map
         d3.json("../data/chapel_hill_all_streets.geojson", d => d).then(geo_json_data => {
             // Define the projection.
@@ -111,7 +111,26 @@ class AMmap {
         })
     }
 
-    render(data_subs) {
+    render(data_subs,x,y) {
+
        console.log(data_subs)
+        let circles = this.svg.selectAll("circle").data(data_subs, d => d.state);
+        circles.join(
+            enter => enter.append("circle")
+                .attr("r", 0)
+                .attr("cx", d => x(d.longitude))
+                .attr("cy", d => y(d.latitude))
+                .style("fill", d => this.cata_color(d.charge_cat))
+                // Animate the radius to have the circles slowly grow to full size.
+                .transition()
+                .delay(500*!circles.exit().empty())
+                .duration(500)
+                .attr("r", 5),
+
+            // There is no modification required for updated circles. They can remain unchanged...
+            update => update,
+
+            exit => exit.transition().duration(500).attr("r", 0).remove()
+        )
     }
 }
