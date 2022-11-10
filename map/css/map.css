@@ -3,12 +3,14 @@ html, body {
     height: 100%;
     background-color: aliceblue;
 }
-button:hover{
-    background-color: lightslategrey;
+.dropdown-submenu {
+    position: relative;
 }
-button:focus, button:active{
-    background-color: lightslategrey;
-    outline: none;
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
 }
 .way {
     fill: none;

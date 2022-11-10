@@ -11,7 +11,7 @@ class AMmap {
         this.svg = d3.select("#" + this.container_id);
     }
 
-    loadAndPrepare(_subs){
+    loadAndPrepare(type,_subs){
         // Load arrest made data.
        d3.csv(this.arrest_url, d => {
             return {
@@ -48,17 +48,14 @@ class AMmap {
 
            //filtering data
             let data_subs = data
-           if(Object.prototype.toString.call(_subs) === "[object Array]") {
-               data_subs = data.filter(d => {
-                   d.sub_cat =  _subs
-               })
-               console.log(data_subs)
-               console.log(_subs)
-           }else {
+           if(type==="main_cata" || type ==="all_subcata"){
                if (_subs != "All") {
-                   data_subs = data.filter(d => d.charge_cat == _subs)
+                   data_subs = data.filter(d => d.charge_cat === _subs)
                }
                this.render(data_subs, x, y)
+           }else if(type=="sub_cata"){
+                   data_subs = data.filter(d=>d.sub_cat === _subs)
+                   this.render(data_subs, x, y)
            }
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")

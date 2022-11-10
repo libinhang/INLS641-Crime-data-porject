@@ -9,9 +9,9 @@
 <script src="js/pie_chart.js"></script>
 <script src="https://unpkg.com/topojson@3"></script>
 
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -32,117 +32,55 @@
     </div>
     <div id="filter_bar">
         <h3>Explore:
-            <div class="btn-group">
-                <button type="button" class="btn" value="Against Minors" onclick="filterData(this.value);">Against Minors</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Minors" checked>Minors</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Alcohol & Drugs" onclick="filterData(this.value);">Alcohol & Drugs</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Alcohol" checked> Alcohol</li>
-                    <li><input class="form-check-input" type="checkbox" value="Drugs" checked> Drugs</li>
-                    <li><input class="form-check-input" type="checkbox" value="Marijuana" checked> Marijuana</a></li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Fraud" onclick="filterData(this.value);">Fraud</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Fraud" checked> Fraud</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Obstruction" onclick="filterData(this.value);">Obstruction</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Obstruction" checked> Obstruction</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Property" onclick="filterData(this.value);">Property</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Property" checked> Property</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Theft" onclick="filterData(this.value);">Theft</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Theft" checked> Theft</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Vehicle" onclick="filterData(this.value);">Vehicle</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Vehicle" checked> Vehicle</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Violent" onclick="filterData(this.value);">Violent</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><input class="form-check-input" type="checkbox" value="Assault" checked> Assault</li>
-                    <li><input class="form-check-input" type="checkbox" value="Domestic Violence" checked> Domestic Violence</li>
-                    <li><input class="form-check-input" type="checkbox" value="Harassment" checked> Harassment</li>
-                    <li><input class="form-check-input" type="checkbox" value="Homicide" checked> Homicide</li>
-                    <li><input class="form-check-input" type="checkbox" value="Kidnapping" checked> Kidnapping</li>
-                    <li><input class="form-check-input" type="checkbox" value="Sexual Offense" checked> Sexual Offense</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Weapons" onclick="filterData(this.value);">Weapons</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu" onchange="filterData(this.className)">
-                    <li><input class="form-check-input" type="checkbox" value="Weapons" checked> Weapons</li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" value="Other" onclick="filterData(this.value);">Other</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu" onchange="filterData(this.className)">
-                    <li><input class="form-check-input" type="checkbox" value="Aiding & Abetting" checked> Aiding & Abetting</li>
-                    <li><input class="form-check-input" type="checkbox" value="Animals" checked> Animals</li>
-                    <li><input class="form-check-input" type="checkbox" value="Conspiracy" checked> Conspiracy</li>
-                    <li><input class="form-check-input" type="checkbox" value="Lower-Level" checked> Lower-Level</li>
-                    <li><input class="form-check-input" type="checkbox" value="Other" checked> Other</li>
-                    <li><input class="form-check-input" type="checkbox" value="Warrants/Summons" checked> Warrants/Summons</li>
-                </ul>
+                <div class="btn-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">All Crimes
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li ><a class="main_cata" tabindex="-1" id="All" onclick="filterData(this.className,this.id);">Show All</a></li>
+                        <li class="divider"></li>
+                        <li ><a class="main_cata" tabindex="-1" id="Against Minors" onclick="filterData(this.className,this.id);">Against Minors</a></li>
+                        <li class="dropdown-submenu">
+                            <a class="cata" tabindex="-1">Alcohol & Drugs <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="all_subcata" tabindex="-1" id="Alcohol & Drugs" onclick="filterData(this.className,this.id);">All</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Alcohol" onclick="filterData(this.className,this.id);">Alcohol</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Drugs" onclick="filterData(this.className,this.id);">Drugs</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Marijuana" onclick="filterData(this.className,this.id);">Marijuana</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="main_cata" tabindex="-1" id="Fraud" onclick="filterData(this.className,this.id);">Fraud</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Obstruction" onclick="filterData(this.className,this.id);">Obstruction</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Property" onclick="filterData(this.className,this.id);">Property</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Theft" onclick="filterData(this.className,this.id);">Theft</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Vehicle" onclick="filterData(this.className,this.id);">Vehicle</a></li>
+                        <li class="dropdown-submenu">
+                            <a class="cata" tabindex="-1">Violent<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="all_subcata" tabindex="-1" id="Violent" onclick="filterData(this.className,this.id);">All</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Assault" onclick="filterData(this.className,this.id);">Assault</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Domestic Violence" onclick="filterData(this.className,this.id);">Domestic Violence</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Harassment" onclick="filterData(this.className,this.id);">Harassment</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Homicide" onclick="filterData(this.className,this.id);">Homicide</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Kidnapping" onclick="filterData(this.className,this.id);">Kidnapping</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Sexual Offense" onclick="filterData(this.className,this.id);">Sexual Offense</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="main_cata" tabindex="-1" id="Weapons" onclick="filterData(this.className,this.id);">Weapons</a></li>
+                        <li class="dropdown-submenu">
+                            <a class="cata" tabindex="-1">Other<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="all_subcata" tabindex="-1" id="Others" onclick="filterData(this.className,this.id);">All</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Aiding & Abetting" onclick="filterData(this.className,this.id);">Aiding & Abetting</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Animals" onclick="filterData(this.className,this.id);">Animals</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Conspiracy" onclick="filterData(this.className,this.id);">Conspiracy</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Lower-Level" onclick="filterData(this.className,this.id);">Lower-Level</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Other" onclick="filterData(this.className,this.id);">Other</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Warrants/Summons" onclick="filterData(this.className,this.id);">Warrants/Summons</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
 <!--            <select onchange="filterData(this.options[this.selectedIndex].value);">-->
 <!--                <option value="All">All</option>-->
@@ -181,22 +119,19 @@
     let pie_chart = new Pie_chart("pie_chart");
     let timeLine = new TimeLine("timeline");
 
-    function filterData(_subs){
-        if(_subs == "dropdown-menu") {
-            let checkedValue = [];
-            let inputElements = document.getElementsByClassName('form-check-input');
-            let len = inputElements.length
-            for (let i = 0; i < len; i++) {
-                if (inputElements[i].checked) {
-                    checkedValue[i] = inputElements[i].value;
-                }
-            }
-            arrestMap.loadAndPrepare(checkedValue);
-        }else {
-            arrestMap.loadAndPrepare(_subs);
-            bar_chart.loadAndPrepare(_subs);
-            pie_chart.loadAndPrepare(_subs);
-        }
+    $(document).ready(function(){
+        $('.dropdown-submenu a.cata').on("click", function(e){
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+
+    function filterData(type,_subs){
+            arrestMap.loadAndPrepare(type,_subs);
+            arrestMap.loadAndPrepare(type,_subs);
+            bar_chart.loadAndPrepare(type,_subs);
+            pie_chart.loadAndPrepare(type,_subs);
     }
     function mapChange(map_type){
         if(map_type == "Incident_report"){
@@ -215,7 +150,7 @@
             t.style.display = 'block'
         }
     }
-    incidentMap.loadAndPrepare("All");
+    incidentMap.loadAndPrepare();
     arrestMap.loadAndPrepare("All");
     bar_chart.loadAndPrepare("All");
     pie_chart.loadAndPrepare("All");
