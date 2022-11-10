@@ -20,6 +20,7 @@ class AMmap {
                 id: d.Incident_Id,
                 charges: d.Primary_Charge,
                 charge_cat: d.Category,
+                sub_cat: d.Subcategory,
                 street: d.Street,
                 city: d.City,
                 date: d.Date_of_Arrest,
@@ -47,10 +48,18 @@ class AMmap {
 
            //filtering data
             let data_subs = data
-            if(_subs!="All"){
-                data_subs = data.filter(d=>d.charge_cat == _subs)
-            }
-            this.render(data_subs,x,y)
+           if(Object.prototype.toString.call(_subs) === "[object Array]") {
+               data_subs = data.filter(d => {
+                   d.sub_cat =  _subs
+               })
+               console.log(data_subs)
+               console.log(_subs)
+           }else {
+               if (_subs != "All") {
+                   data_subs = data.filter(d => d.charge_cat == _subs)
+               }
+               this.render(data_subs, x, y)
+           }
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
             console.log(error);
@@ -112,7 +121,6 @@ class AMmap {
     }
 
     render(data_subs,x,y) {
-
        console.log(data_subs)
         let circles = this.svg.selectAll("circle").data(data_subs, d => d.state);
         circles.join(
