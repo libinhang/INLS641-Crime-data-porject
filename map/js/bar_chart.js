@@ -30,6 +30,7 @@ class Bar_chart {
                     charge_cat: group
                 }
             }, d=>d.charge_cat);
+            // console.log(group_data)
             this.render(data,group_data)
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")

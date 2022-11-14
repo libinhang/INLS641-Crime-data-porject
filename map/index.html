@@ -23,7 +23,7 @@
 <div id="project">
     <div id="title">
         <h2>Police Arrests in Chapel Hill
-            <select class="btn" onchange="mapChange(this.options[this.selectedIndex].value);">
+            <select class="btn btn-default dropdown-toggle" onchange="mapChange(this.options[this.selectedIndex].value);">
                 <option value="Incident_report">Incident Report Map</option>
                 <option value="Arrest_made">Arrest Made Map</option>
             </select>
@@ -40,6 +40,13 @@
                         <li ><a class="main_cata" tabindex="-1" id="All" onclick="filterData(this.className,this.id);">Show All</a></li>
                         <li class="divider"></li>
                         <li ><a class="main_cata" tabindex="-1" id="Against Minors" onclick="filterData(this.className,this.id);">Against Minors</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Fraud" onclick="filterData(this.className,this.id);">Fraud</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Obstruction" onclick="filterData(this.className,this.id);">Obstruction</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Property" onclick="filterData(this.className,this.id);">Property</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Theft" onclick="filterData(this.className,this.id);">Theft</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Vehicle" onclick="filterData(this.className,this.id);">Vehicle</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Weapons" onclick="filterData(this.className,this.id);">Weapons</a></li>
+                        <li class="divider"></li>
                         <li class="dropdown-submenu">
                             <a class="cata" tabindex="-1">Alcohol & Drugs <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -49,11 +56,6 @@
                                 <li><a class="sub_cata" tabindex="-1" id="Marijuana" onclick="filterData(this.className,this.id);">Marijuana</a></li>
                             </ul>
                         </li>
-                        <li><a class="main_cata" tabindex="-1" id="Fraud" onclick="filterData(this.className,this.id);">Fraud</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Obstruction" onclick="filterData(this.className,this.id);">Obstruction</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Property" onclick="filterData(this.className,this.id);">Property</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Theft" onclick="filterData(this.className,this.id);">Theft</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Vehicle" onclick="filterData(this.className,this.id);">Vehicle</a></li>
                         <li class="dropdown-submenu">
                             <a class="cata" tabindex="-1">Violent<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -66,7 +68,6 @@
                                 <li><a class="sub_cata" tabindex="-1" id="Sexual Offense" onclick="filterData(this.className,this.id);">Sexual Offense</a></li>
                             </ul>
                         </li>
-                        <li><a class="main_cata" tabindex="-1" id="Weapons" onclick="filterData(this.className,this.id);">Weapons</a></li>
                         <li class="dropdown-submenu">
                             <a class="cata" tabindex="-1">Other<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -82,16 +83,10 @@
                     </ul>
                 </div>
             </div>
-<!--            <select onchange="filterData(this.options[this.selectedIndex].value);">-->
-<!--                <option value="All">All</option>-->
-<!--                <option value="Drugs">Drugs</option>-->
-<!--                <option value="Animals">Animals</option>-->
-<!--            </select>-->
         </h3>
     </div>
     <div>
         <svg id="Imap"></svg>
-        <div id="description"></div>
     </div>
     <div>
         <div id="multi_charts" >
@@ -101,6 +96,7 @@
         <svg id="Amap"></svg>
         </br>
         </br>
+        <span id="description"></span>
         <span id="timeline"></span>
     </div>
 </div>
@@ -113,7 +109,7 @@
     let t = document.getElementById("timeline")
     let f = document.getElementById("filter_bar")
 
-    let incidentMap = new IRmap("Imap");
+    let incidentMap = new IRmap("Imap")
     let arrestMap = new AMmap("Amap");
     let bar_chart = new Bar_chart("bar_chart");
     let pie_chart = new Pie_chart("pie_chart");
@@ -129,7 +125,6 @@
 
     function filterData(type,_subs){
             arrestMap.loadAndPrepare(type,_subs);
-            arrestMap.loadAndPrepare(type,_subs);
             bar_chart.loadAndPrepare(type,_subs);
             pie_chart.loadAndPrepare(type,_subs);
     }
@@ -139,22 +134,21 @@
             a.style.display = 'none'
             i.style.display = 'block'
             m.style.display = 'none'
-            d.style.display = 'block'
+            d.style.display = 'none'
             t.style.display = 'none'
         }else if(map_type == "Arrest_made") {
             f.style.display = 'block'
             i.style.display = 'none'
             a.style.display = 'block'
             m.style.display = 'block'
-            d.style.display = 'none'
+            d.style.display = 'block'
             t.style.display = 'block'
+            bar_chart.loadAndPrepare("main_cata","All");
+            pie_chart.loadAndPrepare("main_cata","All");
+            timeLine.render();
         }
     }
-    incidentMap.loadAndPrepare();
-    arrestMap.loadAndPrepare("All");
-    bar_chart.loadAndPrepare("All");
-    pie_chart.loadAndPrepare("All");
-    timeLine.render();
+    arrestMap.loadAndPrepare("main_cata","All");
 </script>
 </body>
 </html>

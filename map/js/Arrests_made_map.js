@@ -3,10 +3,8 @@ class AMmap {
         this.arrest_url = "../data/clean_ch_arrests.csv";
         this.container_id = container_id
         this.cata_color = d3.scaleOrdinal(d3.schemeCategory10);
-        this.map_render()
-        this.loadAndPrepare()
-        this.height = 1500;
-        this.width = 1500;
+        this.height = 400;
+        this.width = 400;
         // Select the SVG element for the map.
         this.svg = d3.select("#" + this.container_id);
     }
@@ -32,39 +30,23 @@ class AMmap {
                 drug_or_alcohol: d.Drugs_or_Alcohol_Present,
             }
         }).then(data => {
-            //process data
-            let min_longitude = d3.min(data, d=>d.longitude);
-            let min_latitude = d3.min(data, d=>d.latitude);
-            let max_longitude = d3.max(data, d=>d.longitude);
-            let max_latitude = d3.max(data, d=>d.latitude);
-
-           // set up x and y
-           let x = d3.scaleLinear()
-               .domain([min_longitude, max_longitude])
-               .range([0,this.width]);
-           let y = d3.scaleLinear()
-               .domain([min_latitude, max_latitude])
-               .range([this.height,0]);
-
            //filtering data
-            let data_subs = data
+           let data_subs = data
            if(type==="main_cata" || type ==="all_subcata"){
                if (_subs != "All") {
                    data_subs = data.filter(d => d.charge_cat === _subs)
                }
-               this.render(data_subs, x, y)
            }else if(type=="sub_cata"){
                    data_subs = data.filter(d=>d.sub_cat === _subs)
-                   this.render(data_subs, x, y)
            }
+           this.render(data_subs)
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
             console.log(error);
         })
     }
 
-    map_render(){
-        // load map
+    render(data_subs) {
         d3.json("../data/chapel_hill_all_streets.geojson", d => d).then(geo_json_data => {
             // Define the projection.
             let projection = d3.geoConicConformal()
@@ -107,35 +89,28 @@ class AMmap {
                     }
                 })
                 .attr("d", path)
-                .on("mouseenter", (e, d) => {
-                    d3.select("#road_name").html(d.properties.name.length > 0 ? d.properties.name : "&nbsp;");
-                })
-                .on("mouseout", (e, d) => {
-                        d3.select("#road_name").html("&nbsp;");
-                    }
-                )
+            let circles = this.svg.select("g").selectAll("circle").data(data_subs, d => d.id);
+            circles.join(
+                enter => enter.append("circle")
+                    .attr("r", 0)
+                    .attr("cx", d => projection([d.longitude,d.latitude])[0])
+                    .attr("cy", d => projection([d.longitude,d.latitude])[1])
+                    .style("fill", d => this.cata_color(d.charge_cat))
+                    .on("mouseover", (e, d) => document.getElementById("description").innerHTML = "Arrest " + d.id + " happened in " +
+                        d.street + " and the charge of it is " + d.charges + ". The suspect is a " + d.age + " years old " + d.gender + ", and the race is " + d.race)
+                    .on("mouseout", (e, d) => document.getElementById("description").innerHTML = "&nbsp;")
+                    // Animate the radius to have the circles slowly grow to full size.
+                    .transition()
+                    .delay(600*!circles.exit().empty())
+                    .duration(600)
+                    .attr("r", 2),
+
+                // There is no modification required for updated circles. They can remain unchanged...
+                update => update,
+
+                exit => exit.transition().duration(600).attr("r", 0).remove()
+            )
         })
-    }
 
-    render(data_subs,x,y) {
-       console.log(data_subs)
-        let circles = this.svg.selectAll("circle").data(data_subs, d => d.state);
-        circles.join(
-            enter => enter.append("circle")
-                .attr("r", 0)
-                .attr("cx", d => x(d.longitude))
-                .attr("cy", d => y(d.latitude))
-                .style("fill", d => this.cata_color(d.charge_cat))
-                // Animate the radius to have the circles slowly grow to full size.
-                .transition()
-                .delay(500*!circles.exit().empty())
-                .duration(500)
-                .attr("r", 5),
-
-            // There is no modification required for updated circles. They can remain unchanged...
-            update => update,
-
-            exit => exit.transition().duration(500).attr("r", 0).remove()
-        )
     }
 }
