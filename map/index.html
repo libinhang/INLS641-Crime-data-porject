@@ -128,7 +128,7 @@
     });
 
     function filterData(type,_subs){
-            arrestMap.loadAndPrepare(type,_subs);
+            arrestMap.render(type,_subs);
             bar_chart.loadAndPrepare(type,_subs);
             pie_chart.loadAndPrepare(type,_subs);
     }
@@ -152,7 +152,7 @@
             timeLine.render();
         }
     }
-    arrestMap.loadAndPrepare("main_cata","All");
+    arrestMap.render("main_cata","All");
 </script>
 </body>
 </html>
