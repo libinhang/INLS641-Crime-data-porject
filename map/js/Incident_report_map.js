@@ -101,6 +101,7 @@ class IRmap {
                     .transition()
                     .delay(600*!circles.exit().empty())
                     .duration(600)
+                    .attr("fill-opacity", .4)
                     .attr("r", 2),
 
                 // There is no modification required for updated circles. They can remain unchanged...
