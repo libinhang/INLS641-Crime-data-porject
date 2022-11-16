@@ -27,11 +27,11 @@
                 <option value="Incident_report">Incident Report Map</option>
                 <option value="Arrest_made">Arrest Made Map</option>
             </select>
-            <span style="font-size: 15pt;" id="road_name">&nbsp;</span>
+            <span style="font-size: 15pt;" id="road_name">&nbsp</span>
         </h2>
     </div>
     <div id="filter_bar">
-        <h3>Explore:
+        <h3><span id="cata_info">Crime type</span>:
                 <div class="btn-group">
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">All Crimes
@@ -97,11 +97,12 @@
         <span id="description"></span>
         </br>
         </br>
-        <span id="timeline">
-           <button type="button" class="btn btn-info" data-toggle="button" aria-pressed="false" autocomplete="off">
-           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16"><path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/></svg>
-           </button>
-        </span>
+        <div>
+            <div class="progress" id="timeline"></div>
+            <button class="button" id="play" onclick="play()">play</button>
+            <button class="button" id="stop" onclick="stop()">stop</button>
+            <span id="date"></span>
+        </div>
     </div>
 </div>
 <script>
@@ -110,14 +111,12 @@
     let a = document.getElementById("Amap")
     let m = document.getElementById("multi_charts")
     let d = document.getElementById("description")
-    let t = document.getElementById("timeline")
     let f = document.getElementById("filter_bar")
 
     let incidentMap = new IRmap("Imap")
     let arrestMap = new AMmap("Amap");
     let bar_chart = new Bar_chart("bar_chart");
     let pie_chart = new Pie_chart("pie_chart");
-    let timeLine = new TimeLine("timeline");
 
     $(document).ready(function(){
         $('.dropdown-submenu a.cata').on("click", function(e){
@@ -131,6 +130,7 @@
             arrestMap.render(type,_subs);
             bar_chart.loadAndPrepare(type,_subs);
             pie_chart.loadAndPrepare(type,_subs);
+        document.getElementById("cata_info").innerHTML = _subs
     }
     function mapChange(map_type){
         if(map_type == "Incident_report"){
@@ -139,19 +139,25 @@
             i.style.display = 'block'
             m.style.display = 'none'
             d.style.display = 'none'
-            t.style.display = 'none'
         }else if(map_type == "Arrest_made") {
             f.style.display = 'block'
             i.style.display = 'none'
             a.style.display = 'block'
             m.style.display = 'block'
             d.style.display = 'block'
-            t.style.display = 'block'
+            arrestMap.render("main_cata","All");
             bar_chart.loadAndPrepare("main_cata","All");
             pie_chart.loadAndPrepare("main_cata","All");
-            timeLine.render();
         }
     }
+
+    function play(){
+
+    }
+    function stop(){
+
+    }
+
     arrestMap.render("main_cata","All");
 </script>
 </body>

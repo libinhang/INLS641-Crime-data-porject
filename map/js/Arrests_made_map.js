@@ -8,6 +8,7 @@ class AMmap {
         this.width = 400;
         // Select the SVG element for the map.
         this.svg = d3.select("#" + this.container_id);
+        this.progress = d3.select('#progress').append('svg')
     }
     loadAndPrepare(){
         d3.json("../data/chapel_hill_all_streets.geojson", d => d).then((geo_json_data)=>{
@@ -105,11 +106,22 @@ class AMmap {
 
                 exit => exit.transition().duration(600).attr("r", 0).remove()
             )
+
+            //progress
+            this.progress.append('rect')
+                .attr('class', 'bg-rect')
+                .attr('rx', 10)
+                .attr('ry', 10)
+                .attr('fill', 'gray')
+                .attr('height', 15)
+                .attr('width', function(){
+                    return segmentWidth * states.length;
+                })
+                .attr('x', 0);
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
             console.log(error);
         })
-
 
     }
 }
