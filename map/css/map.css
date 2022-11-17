@@ -56,11 +56,11 @@ html, body {
 #description{
      bottom:0; display: none;
 }
-#multi_charts{
-    width: 65%; height: 400px; border: 1px solid black; position: absolute; display: none;
-}
 #Amap{
-    height: 400px; border: 1px solid black; margin-left: 68%; display: none;
+    width: 50%; height: 400px; border: 1px solid black; position: absolute; display: none;
+}
+#multi_charts{
+    height: 400px; border: 1px solid black; margin-left: 55%; display: none; margin-right: 1%
 }
 #timeline{
     width: 80%; bottom: 0; background-color: lightskyblue;

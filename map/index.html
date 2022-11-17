@@ -22,7 +22,7 @@
 <body>
 <div id="project">
     <div id="title">
-        <h2>Police Arrests in Chapel Hill
+        <h2><span id="map_title">Incident reports in Chapel Hill</span>
             <select class="btn btn-default dropdown-toggle" onchange="mapChange(this.options[this.selectedIndex].value);">
                 <option value="Incident_report">Incident Report Map</option>
                 <option value="Arrest_made">Arrest Made Map</option>
@@ -89,18 +89,18 @@
         <svg id="Imap"></svg>
     </div>
     <div>
+        <svg id="Amap"></svg>
         <div id="multi_charts" >
             <svg id="bar_chart"></svg>
             <svg id="pie_chart"></svg>
         </div>
-        <svg id="Amap"></svg>
         <span id="description"></span>
         </br>
         </br>
         <div>
             <div class="progress" id="timeline"></div>
-            <button class="button" id="play" onclick="play()">play</button>
-            <button class="button" id="stop" onclick="stop()">stop</button>
+            <button class="button" id="play" onclick="play(this.className,this.id)">play</button>
+            <button class="button" id="stop" onclick="stop(this.className,this.id)">stop</button>
             <span id="date"></span>
         </div>
     </div>
@@ -139,23 +139,25 @@
             i.style.display = 'block'
             m.style.display = 'none'
             d.style.display = 'none'
+            document.getElementById("map_title").innerHTML = "Incident reports in Chapel Hill "
         }else if(map_type == "Arrest_made") {
             f.style.display = 'block'
             i.style.display = 'none'
             a.style.display = 'block'
             m.style.display = 'block'
             d.style.display = 'block'
+            document.getElementById("map_title").innerHTML = "Police arrest made in Chapel Hill"
             arrestMap.render("main_cata","All");
             bar_chart.loadAndPrepare("main_cata","All");
             pie_chart.loadAndPrepare("main_cata","All");
         }
     }
 
-    function play(){
-
+    function play(className,id){
+        arrestMap.render(className,id);
     }
-    function stop(){
-
+    function stop(className,id){
+        arrestMap.render(className,id);
     }
 
     arrestMap.render("main_cata","All");
