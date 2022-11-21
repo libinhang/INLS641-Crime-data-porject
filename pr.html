@@ -1,34 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <style>
-    #slider {
-      height: 20px;
-      width: 20px;
-      background: #2394F5;
-      margin: 15px;
-    }
-  </style>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://unpkg.com/simple-statistics@7.7.0/dist/simple-statistics.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>slider demo</title>
+  <link rel="stylesheet" href="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.css">
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
 </head>
-
 <body>
-<div id='slider'></div>
-<script>
-  d3.interval(function(){
-    d3.select("#slider").transition()
-            .duration(1000)
-            .attrTween("width", function() {
-              var i = d3.interpolate(20, 900);
-              var ci = d3.interpolate('#2394F5', '#BDF436');
-              var that = this;
-              return function(t) {
-                that.style.width = i(t) + 'px';
-                that.style.background = ci(t);
-              };
-            });
-  },1500)
-</script>
+<div data-role="header">
+</div>
+<div role="main" class="ui-content">
+  <label for="slider-0">Input slider:</label>
+  <input type="range" name="slider-0" id="slider-0" value="60" min="0" max="100">
+</div>
 </body>
-</html>

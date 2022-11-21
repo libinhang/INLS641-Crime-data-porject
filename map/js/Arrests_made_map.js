@@ -6,6 +6,7 @@ class AMmap {
         this.loadAndPrepare()
         this.height = 400;
         this.width = 400;
+        this.formatDateIntoYear = d3.timeFormat("%Y");
         // Select the SVG element for the map.
         this.svg = d3.select("#" + this.container_id);
     }
@@ -65,7 +66,6 @@ class AMmap {
                 charge_cat: d.Category,
                 sub_cat: d.Subcategory,
                 street: d.Street,
-                city: d.City,
                 date: d.Date_of_Arrest,
                 age: d.Age,
                 race: d.Race,
@@ -77,41 +77,51 @@ class AMmap {
         }).then(data => {
             //filtering data
             let data_subs = data
-            if(type==="main_cata" || type ==="all_subcata"){
-                if (_subs != "All") {
-                    data_subs = data.filter(d => d.charge_cat === _subs)
+                if (type === "main_cata" || type === "all_subcata") {
+                    if (_subs != "All") {
+                        data_subs = data.filter(d => d.charge_cat === _subs)
+                    }
+                } else if (type == "sub_cata") {
+                    data_subs = data.filter(d => d.sub_cat === _subs)
                 }
-            }else if(type=="sub_cata"){
-                data_subs = data.filter(d=>d.sub_cat === _subs)
-            }
-            let circles = this.svg.select("g").selectAll("circle").data(data_subs, d => d.id);
-            circles.join(
-                enter => enter.append("circle")
-                    .attr("r", 0)
-                    .attr("cx", d => this.projection([d.longitude,d.latitude])[0])
-                    .attr("cy", d => this.projection([d.longitude,d.latitude])[1])
-                    .style("fill", d => this.cata_color(d.charge_cat))
-                    .on("mouseover", (e, d) => document.getElementById("description").innerHTML = "Arrest " + d.id + " happened in " +
-                        d.street + " and the charge of it is " + d.charges + ". The suspect is a " + d.age + " years old " + d.gender + ", and the race is " + d.race)
-                    .on("mouseout", (e, d) => document.getElementById("description").innerHTML = "&nbsp;")
-                    // Animate the radius to have the circles slowly grow to full size.
-                    .transition()
-                    .delay(600*!circles.exit().empty())
-                    .duration(600)
-                    .attr("r", 2),
 
-                // There is no modification required for updated circles. They can remain unchanged...
-                update => update,
+                if (type === "form-range") {
+                    let crime_type = document.getElementById("cata_info").innerHTML
+                    let time_data = data_subs.filter(d => this.formatDateIntoYear(new Date(d.date)) <= _subs)
+                    if(crime_type =="Crime type") {
+                        data_subs = time_data
+                    }else if(crime_type =="Alcohol & Drugs" || crime_type =="Other" || crime_type =="Violent"){
+                        data_subs = time_data.filter(d => d.charge_cat === crime_type)
+                    }else{
+                        data_subs = time_data.filter(d => d.sub_cat === crime_type)
+                    }
+                }
 
-                exit => exit.transition().duration(600).attr("r", 0).remove()
+
+            //draw data through time
+                let circles = this.svg.select("g").selectAll("circle").data(data_subs, d => d.id);
+                circles.join(
+                    enter=>enter.append("circle")
+                        .attr("r", 0)
+                        .attr("cx", d => this.projection([d.longitude, d.latitude])[0])
+                        .attr("cy", d => this.projection([d.longitude, d.latitude])[1])
+                        .style("fill", d => this.cata_color(d.charge_cat))
+                        .on("mouseover", (e, d) => document.getElementById("description").innerHTML = "Arrest " + d.id + " happened in " +
+                            d.street + " and the charge of it is " + d.charges + ". The suspect is a " + d.age + " years old " + d.gender + ", and the race is " + d.race)
+                        .on("mouseout", (e, d) => document.getElementById("description").innerHTML = "&nbsp;")
+                        // Animate the radius to have the circles slowly grow to full size.
+                        .transition()
+                        .delay(600 * !circles.exit().empty())
+                        .duration(600)
+                        .attr("r", 2),
+
+                    // There is no modification required for updated circles. They can remain unchanged...
+                    update=>update,
+
+                    exit => exit.transition().duration(600).attr("r", 0).remove()
             )
 
-            if(_subs="play") {
-                d3.interval(this.startTimeline(), 4000)
-            }else if(_subs="stop"){
-
-            }
-
+            console.log(data_subs)
 
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
@@ -119,17 +129,6 @@ class AMmap {
         })
 
     }
-     startTimeline () {
-        // d3.select('#timeline').transition()
-        //     .duration(4000)
-        //     .attrTween("width", function () {
-        //         let i = d3.interpolate(0, 1000);
-        //         let ci = d3.interpolate('#2394F5', '#BDF436');
-        //         let that = this;
-        //         return t=> {
-        //             that.style.width = i(t) + 'px';
-        //             that.style.background = ci(t);
-        //         };
-        //     });
-    }
+
+
 }

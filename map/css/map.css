@@ -62,9 +62,25 @@ html, body {
 #multi_charts{
     height: 400px; border: 1px solid black; margin-left: 55%; display: none; margin-right: 1%
 }
-#timeline{
-    width: 80%; bottom: 0; background-color: lightskyblue;
-}
+
 #filter_bar{
     display: none;
 }
+/*a*/
+datalist {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    writing-mode: horizontal-tb;
+    width: 80%;
+}
+
+option {
+    padding: 0;
+}
+
+input[type="range"] {
+    width: 80%;
+    margin: 0;
+}
+
