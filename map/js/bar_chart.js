@@ -37,35 +37,35 @@ class Bar_chart {
             console.log(error);
         })
     }
-render(data,group_data){
-    let svg = this.svg
-    //set up x and y
-    let x = d3.scaleLinear()
-        .domain([0, 3062])
-        .range([ 0, this.width]);
-    svg.append("g")
-        .attr("transform", `translate(0,0)`)
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
-    let y = d3.scaleBand()
-        .range([ 0, this.height ])
-        .domain(data.map(d=>d.charge_cat))
-        .padding(.1);
+    render(data,group_data){
+        let svg = this.svg
+        //set up x and y
+        let x = d3.scaleLinear()
+            .domain([0, 3062])
+            .range([ 0, this.width]);
+        svg.append("g")
+            .attr("transform", `translate(0,0)`)
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
+        let y = d3.scaleBand()
+            .range([ 0, this.height ])
+            .domain(data.map(d=>d.charge_cat))
+            .padding(.1);
 
-    svg.append("g")
-        .call(d3.axisLeft(y))
+        svg.append("g")
+            .call(d3.axisLeft(y))
 
-    svg.selectAll("rect")
-        .data(group_data)
-        .join("rect")
-        .attr("x", x(0) )
-        .attr("y", d => y(d.charge_cat))
-        .attr("width", d => x(d.group_count))
-        .attr("height", y.bandwidth())
-        .attr("fill", "#69b3a2")
+        svg.selectAll("rect")
+            .data(group_data)
+            .join("rect")
+            .attr("x", x(0) )
+            .attr("y", d => y(d.charge_cat))
+            .attr("width", d => x(d.group_count))
+            .attr("height", y.bandwidth())
+            .attr("fill", "#69b3a2")
 
-}
+    }
 
 }

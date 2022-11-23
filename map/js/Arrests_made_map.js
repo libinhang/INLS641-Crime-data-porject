@@ -88,9 +88,9 @@ class AMmap {
                 if (type === "form-range") {
                     let crime_type = document.getElementById("cata_info").innerHTML
                     let time_data = data_subs.filter(d => this.formatDateIntoYear(new Date(d.date)) <= _subs)
-                    if(crime_type =="Crime type") {
+                    if(crime_type =="Crime type" || crime_type =="All") {
                         data_subs = time_data
-                    }else if(crime_type =="Alcohol & Drugs" || crime_type =="Other" || crime_type =="Violent"){
+                    }else if(crime_type =="Alcohol/Drugs" || crime_type =="Violent" || crime_type =="Others"){
                         data_subs = time_data.filter(d => d.charge_cat === crime_type)
                     }else{
                         data_subs = time_data.filter(d => d.sub_cat === crime_type)

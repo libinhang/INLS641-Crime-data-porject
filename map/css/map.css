@@ -51,28 +51,33 @@ html, body {
     stroke-width: 4px;
 }
 #Imap{
-    width: 80%; height: 500px; border: 1px solid black; text-align: center;
+    width: 80%; height: 500px; margin-left: 5%;
 }
 #description{
-     bottom:0; display: none;
+    bottom: 50px;
+    font-size: 10pt;
+    text-align: center;
 }
 #Amap{
-    width: 50%; height: 400px; border: 1px solid black; position: absolute; display: none;
+     width:95%; margin-left:5%; height: 450px; border: 1px solid black;
 }
 #multi_charts{
-    height: 400px; border: 1px solid black; margin-left: 55%; display: none; margin-right: 1%
+    width:90%; margin-right: 5%; height: 450px; border: 1px solid black;
 }
-
+#hidden{
+    display: none;
+}
 #filter_bar{
     display: none;
 }
+
 /*a*/
 datalist {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     writing-mode: horizontal-tb;
-    width: 80%;
+    width: 100%;
 }
 
 option {
@@ -80,7 +85,6 @@ option {
 }
 
 input[type="range"] {
-    width: 80%;
-    margin: 0;
+    width: 100%;
 }
 
