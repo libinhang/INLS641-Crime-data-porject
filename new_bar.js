@@ -1,47 +1,39 @@
 class Bar_chart {
-
     constructor(container_id) {
-        this.arrest_url = "js/data/clean_ch_arrests.csv";
-        this.container_id = container_id
-        this.cata_color = d3.scaleOrdinal(d3.schemeCategory10);
+        this.url = "js/data/clean_ch_arrests.csv";
+        this.svg_id = container_id;
 
-        // Select the SVG element for the map.
-        let bar_spacing = 2;
-        let margin = {top: 20, right: 10, bottom: 10, left: 90},
-            width = 500 - margin.left - margin.right,
-            height = 300 - margin.top - margin.bottom;
-        this.svg = d3.select("#" + this.container_id)
-            .append("svg")
-            .attr("width", 500)
-            .attr("height", 300);
-            /*.append("g")
-            .attr("transform", `translate(0,0)`);*/
-
-        this.loadAndPrepare();
+        this.loadandprepare();
     }
 
-    loadAndPrepare(){
-        d3.csv(this.arrest_url, d => {
+    loadandprepare() {
+        d3.csv(this.url, d => {
             return {
                 id: d.Incident_Id,
                 charge_cat: d.Category
             }
         }).then(data => {
-            let data_rollup = d3.rollup(data, group => d3.count(group, d=>d.id), d => d.charge_cat);
-            /*     data_rollup.sort((x,y) => d3.ascending(x.value, y.value));*/
+            let data_rollup = d3.rollup(data, group => d3.count(group, d => d.id), d => d.charge_cat);
+            /*/!*     data_rollup.sort((x,y) => d3.ascending(x.value, y.value));*!/*/
             console.log(data_rollup)
-            console.log(height)
 
             let category_data = d3.map(data_rollup, d => d)
             console.log(category_data)
-            console.log(d3.max(category_data.map(d => {return d[1]})))
+            console.log(d3.max(category_data.map(d => {
+                return d[1]
+            })))
 
-            this.render(category_data)
+            this.render(category_data);
         })
     }
 
-    render(category_data){
-        let svg = this.svg
+    render(category_data) {
+        let svg = d3.selectAll("#" + this.svg_id);
+
+        let bar_spacing = 2;
+        let margin = {top: 20, right: 10, bottom: 10, left: 90},
+            width = 500 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
 
         let x = d3.scaleLinear()
             .domain([0, d3.max(category_data.map(d => {return d[1]}))])
@@ -70,7 +62,6 @@ class Bar_chart {
             .attr("class", "axis")
             .attr("transform", "translate(" + margin.left + "," + height + ")")
             .call(d3.axisBottom(x));
-
     }
 
 }
