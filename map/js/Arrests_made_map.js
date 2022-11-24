@@ -121,7 +121,6 @@ class AMmap {
                     exit => exit.transition().duration(600).attr("r", 0).remove()
             )
 
-            console.log(data_subs)
 
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")

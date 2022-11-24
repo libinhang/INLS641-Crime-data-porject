@@ -12,8 +12,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
 
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -33,9 +33,6 @@
                 <option value="Incident_report">Incident Report Map</option>
                 <option value="Arrest_made">Arrest Made Map</option>
             </select>
-<!--            <h3><span>Crime data changes by time</span>-->
-<!--            <input type="checkbox" data-toggle="toggle" id="play-button" class="play-button"><span style="font-size: 15pt;" id="road_name">&nbsp</span>-->
-<!--                </h3>-->
         </h2>
     </div>
     <div id="filter_bar">
@@ -43,12 +40,10 @@
             <div class="btn-group">
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">All Crimes
-                        <span class="caret"></span></button>
+                       </button>
                     <ul class="dropdown-menu">
-                        <li class="divider">All Crimes</li>
                         <li ><a class="main_cata" tabindex="-1" id="All" onclick="filterData(this.className,this.id);">Show All</a></li>
-                        </br>
-                        <li class="divider">Major Category</li>
+                        <li class="divider"></li>
                         <li ><a class="main_cata" tabindex="-1" id="Against Minors" onclick="filterData(this.className,this.id);">Against Minors</a></li>
                         <li><a class="main_cata" tabindex="-1" id="Fraud" onclick="filterData(this.className,this.id);">Fraud</a></li>
                         <li><a class="main_cata" tabindex="-1" id="Obstruction" onclick="filterData(this.className,this.id);">Obstruction</a></li>
@@ -56,12 +51,9 @@
                         <li><a class="main_cata" tabindex="-1" id="Theft" onclick="filterData(this.className,this.id);">Theft</a></li>
                         <li><a class="main_cata" tabindex="-1" id="Vehicle" onclick="filterData(this.className,this.id);">Vehicle</a></li>
                         <li><a class="main_cata" tabindex="-1" id="Weapons" onclick="filterData(this.className,this.id);">Weapons</a></li>
-                        </br>
-                        <li class="divider">Sub-Categories</li>
+                        <li class="divider"></li>
                         <li class="dropdown-submenu">
-                            <a class="cata" tabindex="-1">Alcohol & Drugs<span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z"/>
-                            </svg></a>
+                            <a class="cata" tabindex="-1">Alcohol & Drugs<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="all_subcata" tabindex="-1" id="Alcohol/Drugs" onclick="filterData(this.className,this.id);">All</a></li>
                                 <li><a class="sub_cata" tabindex="-1" id="Alcohol" onclick="filterData(this.className,this.id);">Alcohol</a></li>
@@ -70,9 +62,7 @@
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
-                            <a class="cata" tabindex="-1">Violent<span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z"/>
-                            </svg></a>
+                            <a class="cata" tabindex="-1">Violent<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="all_subcata" tabindex="-1" id="Violent" onclick="filterData(this.className,this.id);">All</a></li>
                                 <li><a class="sub_cata" tabindex="-1" id="Assault" onclick="filterData(this.className,this.id);">Assault</a></li>
@@ -84,9 +74,7 @@
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
-                            <a class="cata" tabindex="-1">Other<span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z"/>
-                            </svg></a>
+                            <a class="cata" tabindex="-1">Other<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="all_subcata" tabindex="-1" id="Others" onclick="filterData(this.className,this.id);">All</a></li>
                                 <li><a class="sub_cata" tabindex="-1" id="Aiding & Abetting" onclick="filterData(this.className,this.id);">Aiding & Abetting</a></li>
@@ -107,15 +95,19 @@
     <div>
         <svg id="Imap"></svg>
     </div>
-    <div id="hidden" >
+    <div id="hidden">
         <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <svg id="Amap"></svg>
             </div>
             <div id="multi_charts" class="col">
+                <div class="col">
                 <svg id="bar_chart"></svg>
+                </div>
+                <div class="col">
                 <svg id="pie_chart"></svg>
+                </div>
             </div>
         </div>
         </div>
@@ -143,6 +135,9 @@
                 <option value="2021" label="2021"></option>
             </datalist>
             </div>
+            <div id="timer">
+                <button type="button" class="btn btn-info" id="play-button" onclick="play()"><span>Time Series Data</span></button>
+            </div>
         </div>
     </div>
 </div>
@@ -168,40 +163,30 @@
 
     $(document).on('input', '#time_range', function() {
         arrestMap.render(this.className,$(this).val());
+        bar_chart.render($(this).val())
     });
 
-    //play button
-    // $(document).on('change', '#play-button', function() {
-    //     $('#play-button').is(":checked")
-    //         var nIntervId;
-    //         function start() {
-    //             // check if an interval has already been set up
-    //             if (!nIntervId) {
-    //                 nIntervId = setInterval(startplay, 1000);
-    //             }
-    //         }
-    //         function startplay() {
-    //             let range = $("input[type=range]").val()
-    //             console.log(range)
-    //             $("input[type=range]").val(range+1)
-    //             console.log( $("input[type=range]").val())
-    //         }
-    //         function stop() {
-    //             clearInterval(nIntervId);
-    //             // release our intervalID from the variable
-    //             nIntervId = null;
-    //         }
-    //         if($('#play-button').is(":checked")){
-    //             start()
-    //         }else{
-    //             stop()
-    //         }
-    // });
+    function play(){
+        $("input[type=range]").val(2009)
+        const myInterval = setInterval(play_timer,1000);
+        function play_timer(){
+            if($("input[type=range]").val()=="2021"){
+                clearInterval(myInterval);
+            }else{
+                let value = parseInt($("input[type=range]").val())
+                value++
+                $("input[type=range]").val(value)
+                arrestMap.render("form-range",value)
+                bar_chart.render(value)
+            }
+        }
+    }
+
     function filterData(type,_subs){
         arrestMap.render(type,_subs);
-        bar_chart.loadAndPrepare(type,_subs);
         pie_chart.loadAndPrepare(type,_subs);
         document.getElementById("cata_info").innerHTML = _subs
+        document.getElementById("time_range").value = 2021
     }
     function mapChange(map_type){
         if(map_type == "Incident_report"){
@@ -214,10 +199,9 @@
             i.style.display = 'none'
             h.style.display = 'block'
             f.style.display = 'block'
-
+            bar_chart.render(2021);
             document.getElementById("map_title").innerHTML = "Police arrest made in Chapel Hill"
             arrestMap.render("main_cata","All");
-            bar_chart.loadAndPrepare("main_cata","All");
             pie_chart.loadAndPrepare("main_cata","All");
         }
     }

@@ -6,6 +6,9 @@ html, body {
 #project{
     margin-left: 30px;
 }
+#title{
+    margin-top: 2%;
+}
 .dropdown-submenu {
     position: relative;
 }
@@ -62,10 +65,10 @@ html, body {
      width:95%; margin-left:5%; height: 450px; border: 1px solid black;
 }
 #multi_charts{
-    width:90%; margin-right: 5%; height: 450px; border: 1px solid black;
+    width:90%; height: 450px;
 }
 #hidden{
-    display: none;
+    margin:1%; display: none;
 }
 #filter_bar{
     display: none;
@@ -88,3 +91,10 @@ input[type="range"] {
     width: 100%;
 }
 
+#timer{
+    text-align: center; font-size: 15px;
+}
+#bar_chart{
+    width: 500px;
+    height: 200px;
+}
