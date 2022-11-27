@@ -62,7 +62,6 @@ class AMmap {
                 longitude: d.X,
                 latitude: d.Y,
                 id: d.Incident_Id,
-                charges: d.Primary_Charge,
                 charge_cat: d.Category,
                 sub_cat: d.Subcategory,
                 street: d.Street,
@@ -90,7 +89,7 @@ class AMmap {
                     let time_data = data_subs.filter(d => this.formatDateIntoYear(new Date(d.date)) <= _subs)
                     if(crime_type =="Crime type" || crime_type =="All") {
                         data_subs = time_data
-                    }else if(crime_type =="Alcohol/Drugs" || crime_type =="Violent" || crime_type =="Others"){
+                    }else if(crime_type =="Alcohol/Drugs" || crime_type =="Violent" || crime_type =="Others" || crime_type =="Against Minors"){
                         data_subs = time_data.filter(d => d.charge_cat === crime_type)
                     }else{
                         data_subs = time_data.filter(d => d.sub_cat === crime_type)

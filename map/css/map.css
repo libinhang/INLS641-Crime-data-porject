@@ -54,7 +54,7 @@ html, body {
     stroke-width: 4px;
 }
 #Imap{
-    width: 80%; height: 500px; margin-left: 5%;
+    width: 80%; height: 500px; margin-left: 5%; border: 1px solid black;
 }
 #description{
     bottom: 50px;
@@ -95,6 +95,6 @@ input[type="range"] {
     text-align: center; font-size: 15px;
 }
 #bar_chart{
-    width: 500px;
+    width: 100%;
     height: 200px;
 }

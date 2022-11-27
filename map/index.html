@@ -106,7 +106,14 @@
                 <svg id="bar_chart"></svg>
                 </div>
                 <div class="col">
-                <svg id="pie_chart"></svg>
+                    <div class="row">
+                        <div class="col">
+                            <svg id="pie_chart_one"></svg>
+                        </div>
+                        <div class="col">
+                            <svg id="pie_chart_two"></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,7 +158,7 @@
     let incidentMap = new IRmap("Imap")
     let arrestMap = new AMmap("Amap");
     let bar_chart = new Bar_chart("bar_chart");
-    let pie_chart = new Pie_chart("pie_chart");
+    let pie_chart = new Pie_chart("pie_chart_one","pie_chart_two");
 
     $(document).ready(function(){
         $('.dropdown-submenu a.cata').on("click", function(e){
@@ -162,15 +169,16 @@
     });
 
     $(document).on('input', '#time_range', function() {
-        arrestMap.render(this.className,$(this).val());
-        bar_chart.render($(this).val())
+        arrestMap.render(this.className,parseInt($(this).val()));
+        bar_chart.render(parseInt($(this).val()))
+        pie_chart.render("time",parseInt($(this).val()))
     });
 
     function play(){
         $("input[type=range]").val(2009)
         const myInterval = setInterval(play_timer,1000);
         function play_timer(){
-            if($("input[type=range]").val()=="2021"){
+            if($("input[type=range]").val()==2021){
                 clearInterval(myInterval);
             }else{
                 let value = parseInt($("input[type=range]").val())
@@ -178,22 +186,22 @@
                 $("input[type=range]").val(value)
                 arrestMap.render("form-range",value)
                 bar_chart.render(value)
+                pie_chart.render("time",value)
             }
         }
     }
 
     function filterData(type,_subs){
-        arrestMap.render(type,_subs);
-        pie_chart.loadAndPrepare(type,_subs);
         document.getElementById("cata_info").innerHTML = _subs
         document.getElementById("time_range").value = 2021
+        arrestMap.render(type,_subs);
+        pie_chart.render("filter",_subs);
     }
     function mapChange(map_type){
         if(map_type == "Incident_report"){
             i.style.display = 'block'
             f.style.display = 'none'
             h.style.display = 'none'
-
             document.getElementById("map_title").innerHTML = "Incident reports in Chapel Hill "
         }else if(map_type == "Arrest_made") {
             i.style.display = 'none'
@@ -202,11 +210,12 @@
             bar_chart.render(2021);
             document.getElementById("map_title").innerHTML = "Police arrest made in Chapel Hill"
             arrestMap.render("main_cata","All");
-            pie_chart.loadAndPrepare("main_cata","All");
+            pie_chart.render("filter","All");
         }
     }
     incidentMap.loadAndPrepare()
     arrestMap.render("main_cata","All")
+    pie_chart.render("filter","All")
 </script>
 </body>
 </html>

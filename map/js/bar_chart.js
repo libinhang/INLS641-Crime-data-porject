@@ -23,10 +23,9 @@ class Bar_chart {
 
             let axis_rollup =d3.rollup(data, group => d3.count(group, d => d.id), d => d.charge_cat);
             let axis_data = d3.map(axis_rollup,d=>d)
-            console.log(data_rollup)
+            // console.log(data_rollup)
 
             let category_data = d3.map(data_rollup, d => d)
-            console.log(category_data)
 
             let svg = d3.selectAll("#" + this.svg_id);
 
@@ -44,7 +43,7 @@ class Bar_chart {
                 .range([0,height])
                 .padding(0.1)
 
-            let bars = svg.selectAll("rect").data(category_data,d=>d.id)
+            let bars = svg.selectAll("rect").data(category_data,d=>d[1])
             bars.join(
                 enter=>enter.append("rect")
                     .attr("class", "bar")
@@ -52,14 +51,14 @@ class Bar_chart {
                     .attr("x", margin.left)
                     .attr("y", (d, i) => y(d[0]))
                     .attr("height", height/(10 + bar_spacing))
-                    // .sort((a,b) => d3.ascending(a[0], b[0]))
+                    .sort((a,b) => d3.ascending(a[0], b[0]))
                     .attr("width", 0)
-                    .transition()
-                    .delay(300 * !bars.exit().empty())
-                    .duration(300)
+                    // .transition()
+                    // .delay(300 * !bars.exit().empty())
+                    // .duration(300)
                     .attr("width", d => x(d[1])),
                 update=>update,
-                exit => exit.transition().duration(300).attr("width", 0).remove()
+                exit => exit.transition().duration(400).attr("width", 0).remove()
             )
 
            svg.append("g")
@@ -71,9 +70,7 @@ class Bar_chart {
                 .attr("class", "axis")
                 .attr("transform", "translate(" + margin.left + "," + height + ")")
                 .call(d3.axisBottom(x));
-            // svg.append("g")
-            //     .attr("class","text")
-            //     .data(d)
+
 
         })
     }
