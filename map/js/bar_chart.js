@@ -30,7 +30,7 @@ class Bar_chart {
             let svg = d3.selectAll("#" + this.svg_id);
 
             let bar_spacing = 2;
-            let margin = {top: 20, right: 10, bottom: 10, left: 90},
+            let margin = {top: 20, right: 10, bottom: 10, left: 85},
                 width = 500 - margin.left - margin.right,
                 height = 200 - margin.top - margin.bottom;
 
@@ -61,7 +61,7 @@ class Bar_chart {
                 exit => exit.transition().duration(400).attr("width", 0).remove()
             )
 
-           svg.append("g")
+            svg.append("g")
                 .attr("class", "axis")
                 .attr("transform", "translate("+margin.left+",0)")
                 .call(d3.axisLeft(y))

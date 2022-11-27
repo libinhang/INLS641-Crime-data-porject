@@ -98,7 +98,7 @@ class IRmap {
             let heatmap_rollup =d3.rollup(data, group => d3.count(group, d => d.id), d => d.street);
             let heatmap_data = d3.map(heatmap_rollup,d=>d)
 
-            console.log(heatmap_data)
+            // console.log(heatmap_data)
 
             let bubbles = this.svg.select("g").selectAll("circle").data(data, d=>d[1]);
             bubbles.join(
