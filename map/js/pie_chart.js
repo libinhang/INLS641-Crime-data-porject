@@ -59,7 +59,7 @@ class Pie_chart {
                 let ethnicity_data_rollup = d3.rollup(data, group => d3.count(group, d => d.id), d => d.ethnicity);
                 let ethnicity_data = d3.map(ethnicity_data_rollup, d => d)
 
-                let pie = d3.pie().value(d => d[1]);
+                let pie = d3.pie().sort(null).value(d => d[1]);
 
                 let pie_labels = d3.arc()
                     .outerRadius(this.oradius)
@@ -77,12 +77,13 @@ class Pie_chart {
                 let svg_sex = this.svg1
                     .attr("width", this.width)
                     .attr("height", this.height)
+                    .append("g")
+                    .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
 
             console.log(pie_one_data)
-            svg_sex.selectAll("path")
+            svg_sex.selectAll("pie_one")
                 .data(pie_one_data)
                 .join("path")
-                .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
                 .transition()
                 .duration(1000)
                 .attr('d', d3.arc()
@@ -96,8 +97,9 @@ class Pie_chart {
 
 
 
-            svg_sex.selectAll("text")
-                .data(pie_one_data,d=>d[1])
+            svg_sex.selectAll("pie_one_label")
+                .data(pie_one_data)
+                .enter()
                 .append("text")
                 .text(d => d.data[0])
                 .attr("transform", d => {return "translate(" + pie_labels.centroid(d) + ")"})
@@ -113,22 +115,23 @@ class Pie_chart {
                     .style("font-size", 20)
                     .attr("transform", "translate(" +  (-this.margin/2) + "," + (-this.margin * 2.5) + ")");
 
-
+            //pie two
                 let svg_ethnicity = d3.selectAll("#" + this.svg_id_two)
                     .attr("width", this.width)
                     .attr("height", this.height)
+                    .append("g")
+                    .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
 
 
-                //pie tow
+
                 let pie_two_data = pie(ethnicity_data);
 
-            svg_ethnicity.selectAll("path")
+            svg_ethnicity.selectAll("pie_two")
                 .data(pie_two_data)
                 .join("path")
-                .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
                 .transition()
                 .duration(1000)
-                .attr("d", d3.arc()
+                .attr('d', d3.arc()
                     .innerRadius(this.iradius)
                     .outerRadius(this.oradius)
                 )
@@ -148,7 +151,7 @@ class Pie_chart {
                     .style("font-size", 20);
 
                 svg_ethnicity.selectAll("pie_two_header")
-                    .data(pie_one_data)
+                    .data(pie_two_data)
                     .enter()
                     .append("text")
                     .text("Ethnicity")
