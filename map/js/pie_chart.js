@@ -275,7 +275,7 @@ class Pie_chart {
                     .enter()
                     .append("text")
                     .text("Ethnicity")
-                    .style("font-size", 15)
+                    .style("font-size", 20)
                     .attr("transform", "translate(" +  (-this.margin/2) + "," + (-this.margin * 2.5) + ")");
             });
 

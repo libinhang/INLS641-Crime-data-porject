@@ -93,6 +93,12 @@ class IRmap {
                     }
                 })
                 .attr("d", path)
+                .on("mouseenter", (e,d) => {
+                    d3.select("#road_name").html(d.properties.name.length > 0 ? d.properties.name : "&nbsp;");
+                })
+                .on("mouseout", (e,d) => {
+                    d3.select("#road_name").html("&nbsp;");
+                })
 
             //Draw heat map
             let heatmap_rollup =d3.rollup(data, group => d3.count(group, d => d.id), d => d.street);
