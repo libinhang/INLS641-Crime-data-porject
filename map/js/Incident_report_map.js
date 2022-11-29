@@ -2,7 +2,6 @@ class IRmap {
     constructor(container_id) {
         this.incident_url = "../data/Police_Incident_Reports_Written.csv"
         this.container_id = container_id;
-        this.cata_color = d3.scaleOrdinal(d3.schemeCategory10);
         this.height = document.getElementById("Imap").getBoundingClientRect().height;
         this.width =  document.getElementById("Imap").getBoundingClientRect().width;
         // Select the SVG element for the map.
@@ -112,12 +111,12 @@ class IRmap {
                     .attr("r", 0)
                     .attr("cx", d => this.projection([d.longitude, d.latitude])[0])
                     .attr("cy", d => this.projection([d.longitude, d.latitude])[1])
-                    .style("fill", d => this.cata_color(d.charge_cat))
+                    .style("fill", "#B03A2E")
                     // Animate the radius to have the circles slowly grow to full size.
                     .transition()
                     .delay(600 * !bubbles.exit().empty())
                     .duration(600)
-                    .style("opacity", 0.2)
+                    .style("opacity", 0.25)
                     .attr("r", 1),
 
                 // There is no modification required for updated circles. They can remain unchanged...
