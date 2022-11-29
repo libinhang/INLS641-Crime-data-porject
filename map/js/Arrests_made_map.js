@@ -62,6 +62,7 @@ class AMmap {
                 longitude: d.X,
                 latitude: d.Y,
                 id: d.Incident_Id,
+                charges: d.Primary_Charge,
                 charge_cat: d.Category,
                 sub_cat: d.Subcategory,
                 street: d.Street,

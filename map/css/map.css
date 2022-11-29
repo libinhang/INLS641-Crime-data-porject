@@ -54,7 +54,10 @@ html, body {
     stroke-width: 4px;
 }
 #Imap{
-    width: 80%; height: 500px; margin-left: 5%; border: 1px solid black;
+    width: 100%; height: 100%; margin-left: 5%; border: 1px solid black;
+}
+#Icontainer{
+    width: 80%; height: 80%;
 }
 #description{
     bottom: 50px;
