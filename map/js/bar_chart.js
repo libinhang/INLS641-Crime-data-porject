@@ -3,6 +3,7 @@ class Bar_chart {
         this.url = "../data/clean_ch_arrests.csv";
         this.formatDateIntoYear = d3.timeFormat("%Y");
         this.svg_id = container_id;
+        this.cata_color = d3.scaleOrdinal(d3.schemeCategory10);
         this.LoadAndPrepare()
     }
 
@@ -31,7 +32,7 @@ class Bar_chart {
 
             let bar_spacing = 2;
             let margin = {top: 20, right: 10, bottom: 10, left: 85},
-                width = 500 - margin.left - margin.right,
+                width = 600 - margin.left - margin.right,
                 height = 200 - margin.top - margin.bottom;
 
             let x = d3.scaleLinear()
@@ -43,11 +44,23 @@ class Bar_chart {
                 .range([0,height])
                 .padding(0.1)
 
+
+            let y_axis = svg.append("g")
+                .attr("class", "Yaxis")
+                .attr("transform", "translate("+margin.left+",0)")
+                .call(d3.axisLeft(y))
+
+
+           let x_axis = svg.append("g")
+                .attr("class", "Xaxis")
+                .attr("transform", "translate(" + margin.left + "," + height + ")")
+                .call(d3.axisBottom(x));
+
             let bars = svg.selectAll("rect").data(category_data,d=>d[1])
             bars.join(
                 enter=>enter.append("rect")
                     .attr("class", "bar")
-                    .style("fill", "steelblue")
+                    .style("fill", d=> this.cata_color(d[0]))
                     .attr("x", margin.left)
                     .attr("y", (d, i) => y(d[0]))
                     .attr("height", height/(10 + bar_spacing))
@@ -57,21 +70,13 @@ class Bar_chart {
                     // .delay(300 * !bars.exit().empty())
                     // .duration(300)
                     .attr("width", d => x(d[1])),
-                update=>update,
+                update=>update.data(category_data,d=>d[0]),
                 exit => exit.transition().duration(400).attr("width", 0).remove()
             )
 
-            svg.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate("+margin.left+",0)")
-                .call(d3.axisLeft(y))
-
-            svg.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate(" + margin.left + "," + height + ")")
-                .call(d3.axisBottom(x));
-
-
+        }).catch(error => {
+            console.log("Error when loading or processing the CSV data.")
+            console.log(error);
         })
     }
 

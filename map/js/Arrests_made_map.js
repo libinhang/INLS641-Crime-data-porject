@@ -72,7 +72,7 @@ class AMmap {
                 gender: d.Gender,
                 ethnicity: d.Ethnicity,
                 type: d.Type_of_Arrest,
-                drug_or_alcohol: d.Drugs_or_Alcohol_Present,
+                drug_or_alcohol: d.Drugs_or_Alcohol_Present
             }
         }).then(data => {
             //filtering data
@@ -113,7 +113,7 @@ class AMmap {
                         .transition()
                         .delay(600 * !circles.exit().empty())
                         .duration(600)
-                        .attr("r", 2),
+                        .attr("r", 1),
 
                     // There is no modification required for updated circles. They can remain unchanged...
                     update=>update,

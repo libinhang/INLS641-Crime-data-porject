@@ -77,9 +77,9 @@ class Pie_chart {
 
             //draw bar chart
 
-            let margin = {top: 50, right: 10, bottom: 10, left: 85},
-                width = 500 - margin.left - margin.right,
-                height = 150 - margin.top - margin.bottom;
+            let margin = {top: 50, right: 0, bottom: 10, left: 45},
+                width = 450 - margin.left - margin.right,
+                height = 175 - margin.top - margin.bottom;
 
             let age_x = d3.scaleLinear()
                 .domain([0, d3.max(age_axis.map(d => d[1]))])
@@ -107,7 +107,7 @@ class Pie_chart {
                     .style("fill","#FF9933")
                     .attr("x", margin.left)
                     .attr("y", (d, i) => age_y(d[0]))
-                    .attr("height", height/(10 + 2))
+                    .attr("height", height/(10 ))
                     .attr("width", d => age_x(d[1])),
                 update=>update,
                 exit => exit.transition().duration(400).attr("width", 0).remove()
@@ -131,7 +131,7 @@ class Pie_chart {
                     .style("fill","#FF6433")
                     .attr("x", margin.left)
                     .attr("y", (d, i) => race_y(d[0]))
-                    .attr("height", height/(10 + 1))
+                    .attr("height", height/(10))
                     .attr("width", d => race_x(d[1])),
                 update=>update,
                 exit => exit.transition().duration(400).attr("width", 0).remove()
@@ -277,7 +277,10 @@ class Pie_chart {
                     .text("Ethnicity")
                     .style("font-size", 20)
                     .attr("transform", "translate(" +  (-this.margin/2) + "," + (-this.margin * 2.5) + ")");
-            });
+            }).catch(error => {
+            console.log("Error when loading or processing the CSV data.")
+            console.log(error);
+        });
 
     }
 

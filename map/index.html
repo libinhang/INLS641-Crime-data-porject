@@ -12,7 +12,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -96,28 +96,28 @@
     <div id="Icontainer">
         <svg id="Imap"></svg>
     </div>
-    <div id="hidden">
+    <div id="hidden" class="container-fluid">
         <div class="container-fluid">
-        <div class="row">
-            <div class="col">
+        <div>
+            <div >
                 <svg id="Amap"></svg>
             </div>
-            <div id="multi_charts" class="col">
+            <div id="multi_charts">
                 <div class="col">
                 <svg id="bar_chart"></svg>
                 </div>
                 <div class="col">
                     <select class="btn btn-default dropdown-toggle" onchange="change_chart(this.options[this.selectedIndex].value);">
-                        <option value="Pie">Pie Charts</option>
-                        <option value="Bar">Bar Charts</option>
+                        <option value="AnS">Age & Sex</option>
+                        <option value="RnE">Race & Ethnicity</option>
                     </select>
                     <div class="row">
-                        <div class="col" id="bars">
+                        <div class="col" id="RnE">
                             <svg id="bar_chart_one"></svg>
-                            <svg id="bar_chart_two"></svg>
-                        </div>
-                        <div class="col" id="pies">
                             <svg id="pie_chart_one"></svg>
+                        </div>
+                        <div class="col" id="AnS">
+                            <svg id="bar_chart_two"></svg>
                             <svg id="pie_chart_two"></svg>
                         </div>
                     </div>
@@ -221,18 +221,17 @@
         }
     }
     function change_chart(chart_type){
-        let bs =  document.getElementById("bars")
-        let ps = document.getElementById("pies")
-        if(chart_type=="Bar"){
-            bs.style.display = 'block'
-            ps.style.display = 'none'
+        let rne =  document.getElementById("RnE")
+        let ans = document.getElementById("AnS")
+        if(chart_type=="AnS"){
+            rne.style.display = 'block'
+            ans.style.display = 'none'
         }else{
-            bs.style.display = 'none'
-            ps.style.display = 'block'
+            rne.style.display = 'none'
+            ans.style.display = 'block'
         }
     }
     incidentMap.loadAndPrepare()
-    arrestMap.render("main_cata","All")
     pie_chart.render("filter","All")
 </script>
 </body>
