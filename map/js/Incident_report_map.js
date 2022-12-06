@@ -19,6 +19,7 @@ class IRmap {
                 street: d.Street,
                 date_of_report: d.Date_of_Report,
                 date_of_occurrence: d.Date_of_Occurrence,
+                report: d.Reported_As,
                 victim_age: d.Victim_Age,
                 victim_race: d.Victim_Race,
                 victim_gender: d.Victim_Gender,
@@ -112,12 +113,14 @@ class IRmap {
                     .attr("cx", d => this.projection([d.longitude, d.latitude])[0])
                     .attr("cy", d => this.projection([d.longitude, d.latitude])[1])
                     .style("fill", "#B03A2E")
+                    .on("click", (e, d) => document.getElementById("idescription").innerHTML = "Date: " + d.date_of_report
+                        + " Offense: " + d.offense + " Reported As: " + d.report)
                     // Animate the radius to have the circles slowly grow to full size.
                     .transition()
                     .delay(600 * !bubbles.exit().empty())
                     .duration(600)
                     .style("opacity", 0.25)
-                    .attr("r", 1),
+                    .attr("r", 3),
 
                 // There is no modification required for updated circles. They can remain unchanged...
                 update=>update,

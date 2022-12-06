@@ -28,7 +28,7 @@
 <body>
 <div id="project" class="container">
     <div id="title">
-        <h2><span id="map_title">Incident reports in Chapel Hill</span>
+        <h2><span id="map_title">Chapel Hill Incident Reports</span>
             <select class="btn btn-default dropdown-toggle" onchange="mapChange(this.options[this.selectedIndex].value);">
                 <option value="Incident_report">Incident Report Map</option>
                 <option value="Arrest_made">Arrest Made Map</option>
@@ -37,53 +37,56 @@
         </h2>
     </div>
     <div id="filter_bar">
-        <h3><span id="cata_info">Crime type</span>:
+        <br>
+        <h4><div>1. Filter the map, bar charts, and pie charts with the sliders below. <br>
+            2. Filter the map, age, sex, race, and ethnicity charts with the dropdown menus. </div></h4>
+        <br>
+        <h3><span>Filter By:</span>
             <div class="btn-group">
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">All Crimes
-                       </button>
-                    <ul class="dropdown-menu">
-                        <li ><a class="main_cata" tabindex="-1" id="All" onclick="filterData(this.className,this.id);">Show All</a></li>
+                    </button>
+                    <ul class="dropdown-menu" id = "category_list">
+                        <li ><a class="main_cata" tabindex="-1" id="All" onclick="filterData(this.id);">Show All</a></li>
                         <li class="divider"></li>
-                        <li ><a class="main_cata" tabindex="-1" id="Against Minors" onclick="filterData(this.className,this.id);">Against Minors</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Fraud" onclick="filterData(this.className,this.id);">Fraud</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Obstruction" onclick="filterData(this.className,this.id);">Obstruction</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Property" onclick="filterData(this.className,this.id);">Property</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Theft" onclick="filterData(this.className,this.id);">Theft</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Vehicle" onclick="filterData(this.className,this.id);">Vehicle</a></li>
-                        <li><a class="main_cata" tabindex="-1" id="Weapons" onclick="filterData(this.className,this.id);">Weapons</a></li>
+                        <li ><a class="main_cata" tabindex="-1" id="Against Minors" onclick="filterData(this.id);">Against Minors</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Fraud" onclick="filterData(this.id);">Fraud</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Obstruction" onclick="filterData(this.id);">Obstruction</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Property" onclick="filterData(this.id);">Property</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Theft" onclick="filterData(this.id);">Theft</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Vehicle" onclick="filterData(this.id);">Vehicle</a></li>
+                        <li><a class="main_cata" tabindex="-1" id="Weapons" onclick="filterData(this.id);">Weapons</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-submenu">
                             <a class="cata" tabindex="-1">Alcohol & Drugs<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="all_subcata" tabindex="-1" id="Alcohol/Drugs" onclick="filterData(this.className,this.id);">All</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Alcohol" onclick="filterData(this.className,this.id);">Alcohol</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Drugs" onclick="filterData(this.className,this.id);">Drugs</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Marijuana" onclick="filterData(this.className,this.id);">Marijuana</a></li>
+                                <li><a class="all_subcata" tabindex="-1" id="Alcohol/Drugs" onclick="filterData(this.id);">All</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Alcohol" onclick="filterData(this.id);">Alcohol</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Drugs" onclick="filterData(this.id);">Drugs</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Marijuana" onclick="filterData(this.id);">Marijuana</a></li>
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
                             <a class="cata" tabindex="-1">Violent<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="all_subcata" tabindex="-1" id="Violent" onclick="filterData(this.className,this.id);">All</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Assault" onclick="filterData(this.className,this.id);">Assault</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Domestic Violence" onclick="filterData(this.className,this.id);">Domestic Violence</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Harassment" onclick="filterData(this.className,this.id);">Harassment</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Homicide" onclick="filterData(this.className,this.id);">Homicide</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Kidnapping" onclick="filterData(this.className,this.id);">Kidnapping</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Sexual Offense" onclick="filterData(this.className,this.id);">Sexual Offense</a></li>
+                                <li><a class="all_subcata" tabindex="-1" id="Violent" onclick="filterData(this.id);">All</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Assault" onclick="filterData(this.id);">Assault</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Domestic Violence" onclick="filterData(this.id);">Domestic Violence</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Harassment" onclick="filterData(this.id);">Harassment</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Homicide" onclick="filterData(this.id);">Homicide</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Kidnapping" onclick="filterData(this.id);">Kidnapping</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Sexual Offense" onclick="filterData(this.id);">Sexual Offense</a></li>
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
                             <a class="cata" tabindex="-1">Other<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="all_subcata" tabindex="-1" id="Others" onclick="filterData(this.className,this.id);">All</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Aiding & Abetting" onclick="filterData(this.className,this.id);">Aiding & Abetting</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Animals" onclick="filterData(this.className,this.id);">Animals</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Conspiracy" onclick="filterData(this.className,this.id);">Conspiracy</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Lower-Level" onclick="filterData(this.className,this.id);">Lower-Level</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Other" onclick="filterData(this.className,this.id);">Other</a></li>
-                                <li><a class="sub_cata" tabindex="-1" id="Warrants/Summons" onclick="filterData(this.className,this.id);">Warrants/Summons</a></li>
+                                <li><a class="all_subcata" tabindex="-1" id="Others" onclick="filterData(this.id);">All</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Aiding & Abetting" onclick="filterData(this.id);">Aiding & Abetting</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Animals" onclick="filterData(this.id);">Animals</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Conspiracy" onclick="filterData(this.id);">Conspiracy</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Lower-Level" onclick="filterData(this.id);">Lower-Level</a></li>
+                                <li><a class="sub_cata" tabindex="-1" id="Warrants/Summons" onclick="filterData(this.id);">Warrants/Summons</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -91,26 +94,31 @@
             </div>
         </h3>
     </div>
-        </h3>
-    </div>
-    <div id="Icontainer">
-        <svg id="Imap"></svg>
-    </div>
-    <div id="hidden" class="container-fluid">
-        <div class="container-fluid">
+    </h3>
+</div>
+<div id="Icontainer">
+    <h4><div id = "idescription" style="padding-left: 80px" ></div></h4>
+    <svg id="Imap"></svg>
+</div>
+<div id="hidden" class="container-fluid">
+    <div class="container-fluid">
         <div>
             <div >
+                <h5>Description:</h5>
+                <div id="description"></div>
                 <svg id="Amap"></svg>
             </div>
             <div id="multi_charts">
                 <div class="col">
-                <svg id="bar_chart"></svg>
+                    <svg id="bar_chart"></svg>
                 </div>
                 <div class="col">
-                    <select class="btn btn-default dropdown-toggle" onchange="change_chart(this.options[this.selectedIndex].value);">
-                        <option value="AnS">Age & Sex</option>
-                        <option value="RnE">Race & Ethnicity</option>
-                    </select>
+                    <h3><span id = "cata_info">All</span>
+                        <select class="btn btn-default dropdown-toggle" onchange="change_chart(this.options[this.selectedIndex].value);">
+                            <option value="AnS">Age & Sex</option>
+                            <option value="RnE">Race & Ethnicity</option>
+                        </select>
+                    </h3>
                     <div class="row">
                         <div class="col" id="RnE">
                             <svg id="bar_chart_one"></svg>
@@ -124,36 +132,41 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+        <br>
+        <br>
+        <div id="timer">
+            <button type="button" class="btn btn-info" id="play-button" onclick="play()"><span>Play Months</span></button>
         </div>
-        <div class="container">
-                <span id="description"></span>
-            <br>
-            <br>
-            <div class="column" id="timeline" >
-                <input type="range" class="form-range" id="time_range" value="2021" min="2010" max="2021" step="1" list="tickmarks"/>
-            </div>
-            <div class="column">
-            <datalist id="tickmarks">
-                <option value="2009" label="2009"></option>
-                <option value="2010" label="2010"></option>
-                <option value="2011" label="2011"></option>
-                <option value="2012" label="2012"></option>
-                <option value="2013" label="2013"></option>
-                <option value="2014" label="2014"></option>
-                <option value="2015" label="2015"></option>
-                <option value="2016" label="2016"></option>
-                <option value="2017" label="2017"></option>
-                <option value="2018" label="2018"></option>
-                <option value="2019" label="2019"></option>
-                <option value="2020" label="2020"></option>
-                <option value="2021" label="2021"></option>
+        <div class="column" id="timeline_1" >
+            <input type="range" class="form-range" id="month_range" value="4" min="1" max="4" step="1" list="tickmarks_1"/>
+        </div>
+        <div class="column">
+            <datalist id="tickmarks_1">
+                <option value="1" label="January - March"></option>
+                <option value="2" label="April - June"></option>
+                <option value="3" label="July - September"></option>
+                <option value="4" label="October - December"></option>
             </datalist>
-            </div>
-            <div id="timer">
-                <button type="button" class="btn btn-info" id="play-button" onclick="play()"><span>Time Series Data</span></button>
-            </div>
+        </div>
+        <br>
+        <br>
+        <div class="column" id="timeline_2" >
+            <input type="range" class="form-range" id="hour_range" value="4" min="1" max="4" step="1" list="tickmarks_2"/>
+        </div>
+        <div class="column">
+            <datalist id="tickmarks_2">
+                <option value="1" label="Morning: 6AM - 12PM"></option>
+                <option value="2" label="Afternoon: 12PM - 6PM"></option>
+                <option value="3" label="Evening: 6PM - 12AM"></option>
+                <option value="4" label="After Midnight: 12AM - 6AM"></option>
+            </datalist>
         </div>
     </div>
+    <br>
+    <div style="text-align: center">Scope: 10-24-2020 to 10-24-2021</div>
+</div>
 </div>
 <span id="date" style="display: none"></span>
 <script>
@@ -175,49 +188,63 @@
         });
     });
 
-    $(document).on('input', '#time_range', function() {
-        arrestMap.render(this.className,parseInt($(this).val()));
-        bar_chart.render(parseInt($(this).val()))
-        pie_chart.render("time",parseInt($(this).val()))
+
+    $(document).on('input', '#month_range', function() {
+        let crime_cat = document.getElementById("cata_info").innerHTML
+        let time_of_day = document.getElementById("hour_range").value
+        arrestMap.render(crime_cat, parseInt($(this).val()), time_of_day);
+        bar_chart.render(parseInt($(this).val()), time_of_day)
+        pie_chart.render(parseInt($(this).val()), crime_cat, time_of_day)
+    });
+    $(document).on('input', '#hour_range', function() {
+        let crime_cat = document.getElementById("cata_info").innerHTML
+        let time_of_year = document.getElementById("month_range").value
+        arrestMap.render(crime_cat, time_of_year, parseInt($(this).val()));
+        bar_chart.render(time_of_year, parseInt($(this).val()))
+        pie_chart.render(time_of_year, crime_cat, parseInt($(this).val()))
     });
 
     function play(){
-        $("input[type=range]").val(2009)
-        const myInterval = setInterval(play_timer,1000);
+        document.getElementById("month_range").value = 1
+        let crime_cat = document.getElementById("cata_info").innerHTML
+        let time_of_day = document.getElementById("hour_range").value
+        const myInterval = setInterval(play_timer,2000);
         function play_timer(){
-            if($("input[type=range]").val()==2021){
+            if(document.getElementById("month_range").value==4){
                 clearInterval(myInterval);
             }else{
-                let value = parseInt($("input[type=range]").val())
+                let value = parseInt(document.getElementById("month_range").value)
                 value++
-                $("input[type=range]").val(value)
-                arrestMap.render("form-range",value)
-                bar_chart.render(value)
-                pie_chart.render("time",value)
+                document.getElementById("month_range").value = value
+                arrestMap.render(crime_cat, value, time_of_day)
+                bar_chart.render(value, time_of_day)
+                pie_chart.render(value, crime_cat, time_of_day)
             }
         }
     }
 
-    function filterData(type,_subs){
+    function filterData(_subs){
         document.getElementById("cata_info").innerHTML = _subs
-        document.getElementById("time_range").value = 2021
-        arrestMap.render(type,_subs);
-        pie_chart.render("filter",_subs);
+        let crime_cat = document.getElementById("cata_info").innerHTML
+        let time_of_year = document.getElementById("month_range").value
+        let time_of_day = document.getElementById("hour_range").value
+        arrestMap.render(crime_cat, time_of_year, time_of_day);
+        pie_chart.render(time_of_year, crime_cat, time_of_day);
     }
     function mapChange(map_type){
         if(map_type == "Incident_report"){
             i.style.display = 'block'
             f.style.display = 'none'
             h.style.display = 'none'
-            document.getElementById("map_title").innerHTML = "Incident reports in Chapel Hill "
+            document.getElementById("map_title").innerHTML = "Chapel Hill Incident Reports"
         }else if(map_type == "Arrest_made") {
             i.style.display = 'none'
             h.style.display = 'block'
             f.style.display = 'block'
-            bar_chart.render(2021);
-            document.getElementById("map_title").innerHTML = "Police arrest made in Chapel Hill"
-            arrestMap.render("main_cata","All");
-            pie_chart.render("filter","All");
+            bar_chart.render(document.getElementById("month_range").value, document.getElementById("hour_range").value);
+            document.getElementById("map_title").innerHTML = "Chapel Hill Arrests"
+            arrestMap.render("All", document.getElementById("month_range").value, document.getElementById("hour_range").value);
+            pie_chart.render(document.getElementById("month_range").value, "All", document.getElementById("hour_range").value);
         }
     }
     function change_chart(chart_type){
@@ -232,7 +259,7 @@
         }
     }
     incidentMap.loadAndPrepare()
-    pie_chart.render("filter","All")
+    pie_chart.render(document.getElementById("month_range").value, "All", document.getElementById("hour_range").value)
 </script>
 </body>
 </html>

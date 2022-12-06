@@ -17,14 +17,52 @@ class Bar_chart {
         })
     }
 
-    render(_subs) {
+    render(quarter, hour_block) {
         this.category_data.then(data => {
-            let filtered_data = data.filter(d => this.formatDateIntoYear(new Date(d.date)) <= _subs)
-            let data_rollup = d3.rollup(filtered_data, group => d3.count(group, d => d.id), d => d.charge_cat);
+
+            let first_month = 0
+            let last_month = 0
+            if (quarter == 1) {
+                first_month = 0
+                last_month = 2
+            } else if (quarter == 2) {
+                first_month = 3
+                last_month = 5
+            } else if (quarter == 3) {
+                first_month = 6
+                last_month = 8
+            } else if (quarter == 4) {
+                first_month = 9
+                last_month = 11
+            }
+
+            let block_start = 0
+            let block_end = 0
+            if (hour_block == 1) {
+                block_start = 6
+                block_end = 12
+            } else if (hour_block == 2) {
+                block_start = 12
+                block_end = 19
+            } else if (hour_block == 3) {
+                block_start = 19
+                block_end = 24
+            } else if (hour_block == 4) {
+                block_start = 0
+                block_end = 6
+            }
+
+            let filtered_data = data.filter(d =>
+                new Date(d.date).getMonth() <= last_month && new Date(d.date).getMonth() >= first_month
+            )
+            let time_data_2 = filtered_data.filter(d =>
+                new Date(d.date).getHours() >= block_start && new Date(d.date).getHours() < block_end
+            )
+            let data_rollup = d3.rollup(time_data_2, group => d3.count(group, d => d.id), d => d.charge_cat);
 
             let axis_rollup =d3.rollup(data, group => d3.count(group, d => d.id), d => d.charge_cat);
             let axis_data = d3.map(axis_rollup,d=>d)
-            // console.log(data_rollup)
+
 
             let category_data = d3.map(data_rollup, d => d)
 
@@ -36,7 +74,7 @@ class Bar_chart {
                 height = 200 - margin.top - margin.bottom;
 
             let x = d3.scaleLinear()
-                .domain([0, d3.max(axis_data.map(d => d[1]))])
+                .domain([0, 700])
                 .range([0, width]);
 
             let y = d3.scaleBand()
@@ -45,13 +83,13 @@ class Bar_chart {
                 .padding(0.1)
 
 
-            let y_axis = svg.append("g")
-                .attr("class", "Yaxis")
+            svg.append("g")
+                .attr("id", "Yaxis")
                 .attr("transform", "translate("+margin.left+",0)")
                 .call(d3.axisLeft(y))
 
 
-           let x_axis = svg.append("g")
+            svg.append("g")
                 .attr("class", "Xaxis")
                 .attr("transform", "translate(" + margin.left + "," + height + ")")
                 .call(d3.axisBottom(x));
@@ -74,6 +112,7 @@ class Bar_chart {
                 exit => exit.transition().duration(400).attr("width", 0).remove()
             )
 
+
         }).catch(error => {
             console.log("Error when loading or processing the CSV data.")
             console.log(error);
@@ -82,6 +121,3 @@ class Bar_chart {
 
 }
 
-
-/*
-console.log("hi")*/
